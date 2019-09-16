@@ -7,7 +7,11 @@ const instance = axios.create({
 const getArticles = async topic => {
   const {
     data: { articles }
-  } = await instance.get("/articles");
+  } = await instance.get("/articles", {
+    params: {
+      topic
+    }
+  });
   return articles;
 };
 
