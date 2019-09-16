@@ -10,7 +10,7 @@ import Article from "../../../articles/components/Article";
 import CommentsList from "../../../comments/components/CommentsList";
 import UserDetails from "../../../user/components/UserDetails";
 import api from "../../../api";
-import PostCommentForm from "../../../comments/components/PostCommentForm";
+import ErrorPage from "../../../errors/components/ErrorPage";
 
 class App extends Component {
   state = {
@@ -47,6 +47,7 @@ class App extends Component {
                 <CommentsList path="comments" user={user} />
               </Article>
             </Topic>
+            <ErrorPage default />
           </Router>
         </Flex>
       </Flex>
