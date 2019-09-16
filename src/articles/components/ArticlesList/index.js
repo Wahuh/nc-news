@@ -7,7 +7,8 @@ import api from "../../../api.js";
 class ArticlesList extends Component {
   state = {
     articles: [],
-    sortBy: "created_at"
+    sortBy: "created_at",
+    err: null
   };
 
   async componentDidMount() {
@@ -25,8 +26,12 @@ class ArticlesList extends Component {
   async fetchArticles() {
     const { topic } = this.props;
     const { sortBy } = this.state;
-    const articles = await api.getArticles({ topic, sort_by: sortBy });
-    this.setState({ articles });
+    try {
+      const articles = await api.getArticles({ topic, sort_by: sortBy });
+      this.setState({ articles });
+    } catch (err) {
+      this.setState({ err });
+    }
   }
 
   handleSort = sortBy => {
@@ -34,7 +39,9 @@ class ArticlesList extends Component {
   };
 
   render() {
-    const { articles } = this.state;
+    const { articles, err } = this.state;
+    if (err) return <div>OH NOOOOO</div>;
+
     return (
       <Flex sx={{ position: "relative" }} flexDirection="column">
         <Flex flexDirection="row" justifyContent="flex-end">
