@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Flex } from "rebass";
 import api from "../../../api";
+import PostCommentForm from "../PostCommentForm";
 
 class CommentsList extends Component {
   state = {
@@ -13,20 +14,34 @@ class CommentsList extends Component {
     this.setState({ comments });
   }
 
+  handlePostComment = comment => {
+    this.setState(currentState => ({
+      comments: [...currentState.comments, comment]
+    }));
+  };
+
   render() {
     const { comments } = this.state;
+    const { user, article_id } = this.props;
     return (
-      <Flex flexDirection="column">
-        {comments.map(comment => {
-          const { votes, author, created_at, comment_id, body } = comment;
-          return (
-            <li>
-              {author}
-              {body}
-            </li>
-          );
-        })}
-      </Flex>
+      <div>
+        <PostCommentForm
+          article_id={article_id}
+          user={user}
+          onPostComment={this.handlePostComment}
+        />
+        <Flex flexDirection="column">
+          {comments.map(comment => {
+            const { votes, author, created_at, comment_id, body } = comment;
+            return (
+              <li>
+                {author}
+                {body}
+              </li>
+            );
+          })}
+        </Flex>
+      </div>
     );
   }
 }

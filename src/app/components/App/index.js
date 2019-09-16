@@ -10,6 +10,7 @@ import Article from "../../../articles/components/Article";
 import CommentsList from "../../../comments/components/CommentsList";
 import UserDetails from "../../../user/components/UserDetails";
 import api from "../../../api";
+import PostCommentForm from "../../../comments/components/PostCommentForm";
 
 class App extends Component {
   state = {
@@ -43,7 +44,7 @@ class App extends Component {
             <Home path="/" />
             <Topic path="/t/:topic">
               <Article path="/articles/:article_id">
-                <CommentsList path="comments" />
+                <CommentsList path="comments" user={user} />
               </Article>
             </Topic>
           </Router>

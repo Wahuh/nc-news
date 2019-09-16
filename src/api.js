@@ -11,6 +11,13 @@ const getUserByUsername = async username => {
   return user;
 };
 
+const postComment = async ({ article_id, ...rest }) => {
+  const {
+    data: { comment }
+  } = await instance.post(`/articles/${article_id}/comments`, rest);
+  return comment;
+};
+
 const getArticleById = async article_id => {
   const {
     data: { article }
@@ -45,5 +52,6 @@ export default {
   getArticleById,
   getArticles,
   getTopics,
-  getUserByUsername
+  getUserByUsername,
+  postComment
 };
