@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Location, Router } from "@reach/router";
 import { Flex } from "rebass";
 import "./App.css";
@@ -8,33 +8,49 @@ import NavigationDropdown from "../NavigationDropdown";
 import Topic from "../../../topics/components/Topic";
 import Article from "../../../articles/components/Article";
 import CommentsList from "../../../comments/components/CommentsList";
+import UserDetails from "../../../user/components/UserDetails";
+import api from "../../../api";
 
-const App = () => {
-  return (
-    <Flex sx={{ height: "100vh", width: "100%" }} flexDirection="column">
-      <Header>
-        <Location>
-          {({ location }) => <NavigationDropdown path={location.pathname} />}
-        </Location>
-      </Header>
+class App extends Component {
+  state = {
+    user: null
+  };
 
-      <Flex
-        flexDirection="column"
-        alignItems="center"
-        sx={{ flex: 1 }}
-        as="main"
-      >
-        <Router>
-          <Home path="/" />
-          <Topic path="/t/:topic">
-            <Article path="/articles/:article_id">
-              <CommentsList path="comments" />
-            </Article>
-          </Topic>
-        </Router>
+  async componentDidMount() {
+    const user = await api.getUserByUsername("jessjelly");
+    this.setState({ user });
+  }
+
+  render() {
+    const { user } = this.state;
+    if (!user) return null;
+    return (
+      <Flex sx={{ height: "100vh", width: "100%" }} flexDirection="column">
+        <Header>
+          <Location>
+            {({ location }) => <NavigationDropdown path={location.pathname} />}
+          </Location>
+          <UserDetails user={user} />
+        </Header>
+
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          sx={{ flex: 1 }}
+          as="main"
+        >
+          <Router>
+            <Home path="/" />
+            <Topic path="/t/:topic">
+              <Article path="/articles/:article_id">
+                <CommentsList path="comments" />
+              </Article>
+            </Topic>
+          </Router>
+        </Flex>
       </Flex>
-    </Flex>
-  );
-};
+    );
+  }
+}
 
 export default App;

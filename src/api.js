@@ -4,6 +4,13 @@ const instance = axios.create({
   baseURL: "https://speedwagon-server.herokuapp.com/api"
 });
 
+const getUserByUsername = async username => {
+  const {
+    data: { user }
+  } = await instance.get(`/users/${username}`);
+  return user;
+};
+
 const getArticleById = async article_id => {
   const {
     data: { article }
@@ -37,5 +44,6 @@ export default {
   getCommentsByArticleId,
   getArticleById,
   getArticles,
-  getTopics
+  getTopics,
+  getUserByUsername
 };
