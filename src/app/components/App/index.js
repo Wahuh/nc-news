@@ -7,6 +7,7 @@ import Home from "../../../home/components/Home";
 import NavigationDropdown from "../NavigationDropdown";
 import Topic from "../../../topics/components/Topic";
 import Article from "../../../articles/components/Article";
+import CommentsList from "../../../comments/components/CommentsList";
 
 const App = () => {
   return (
@@ -26,7 +27,9 @@ const App = () => {
         <Router>
           <Home path="/" />
           <Topic path="/t/:topic">
-            <Article path="/articles/:article_id" />
+            <Article path="/articles/:article_id">
+              <CommentsList path="comments" />
+            </Article>
           </Topic>
         </Router>
       </Flex>

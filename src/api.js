@@ -11,6 +11,13 @@ const getArticleById = async article_id => {
   return article;
 };
 
+const getCommentsByArticleId = async article_id => {
+  const {
+    data: { comments }
+  } = await instance.get(`/articles/${article_id}/comments`);
+  return comments;
+};
+
 const getArticles = async topic => {
   const {
     data: { articles }
@@ -27,6 +34,7 @@ const getTopics = () => {
 };
 
 export default {
+  getCommentsByArticleId,
   getArticleById,
   getArticles,
   getTopics
