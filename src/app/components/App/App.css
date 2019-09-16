@@ -1,5 +1,11 @@
 @import url("https://use.typekit.net/qrp3mwb.css");
 
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
   font-family: acumin-pro, sans-serif;
+  background-color: #F2F2F2;
 }
