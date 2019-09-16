@@ -25,12 +25,12 @@ const getCommentsByArticleId = async article_id => {
   return comments;
 };
 
-const getArticles = async topic => {
+const getArticles = async query => {
   const {
     data: { articles }
   } = await instance.get("/articles", {
     params: {
-      topic
+      ...query
     }
   });
   return articles;
