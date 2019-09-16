@@ -26,7 +26,13 @@ class Topic extends Component {
 
   render() {
     const { articles } = this.state;
-    return <ArticlesList articles={articles} />;
+    const { children } = this.props;
+    return (
+      <>
+        {children}
+        <ArticlesList articles={articles} />
+      </>
+    );
   }
 }
 
