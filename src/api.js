@@ -1,17 +1,18 @@
 import axios from "axios";
-import { async } from "q";
 
-const apiUrl = "https://speedwagon-server.herokuapp.com/api";
+const instance = axios.create({
+  baseURL: "https://speedwagon-server.herokuapp.com/api"
+});
 
-const getArticles = async () => {
+const getArticles = async topic => {
   const {
     data: { articles }
-  } = await axios.get(`${apiUrl}/articles`);
+  } = await instance.get("/articles");
   return articles;
 };
 
 const getTopics = () => {
-  axios.get(`${apiUrl}/topics`).then(response => console.log(response.data));
+  instance.get("/topics").then(response => console.log(response.data));
 };
 
 export default {
