@@ -6,12 +6,14 @@ import SortBy from "./SortBy";
 import api from "../api";
 import Article from "./Article";
 import ErrorPage from "../errors/ErrorPage";
+import Spinner from "../common/Spinner";
 
 class ArticlesList extends Component {
   state = {
     articles: [],
     sortBy: "created_at",
-    err: null
+    err: null,
+    isLoading: true
   };
 
   async componentDidMount() {
@@ -22,6 +24,7 @@ class ArticlesList extends Component {
     const { topic } = this.props;
     const { sortBy } = this.state;
     if (prevProps.topic !== topic || prevState.sortBy !== sortBy) {
+      this.setState({ isLoading: true });
       await this.fetchArticles();
     }
   }
@@ -31,9 +34,9 @@ class ArticlesList extends Component {
     const { sortBy } = this.state;
     try {
       const articles = await api.getArticles({ topic, sort_by: sortBy });
-      this.setState({ articles });
+      this.setState({ articles, isLoading: false });
     } catch (err) {
-      this.setState({ err });
+      this.setState({ err, isLoading: false });
     }
   }
 
@@ -54,7 +57,7 @@ class ArticlesList extends Component {
 
   render() {
     const { user, uri, topic } = this.props;
-    const { articles, err } = this.state;
+    const { articles, err, isLoading } = this.state;
     if (err) return <ErrorPage />;
 
     return (
@@ -67,20 +70,24 @@ class ArticlesList extends Component {
             path="/articles/:article_id/*"
           />
         </Router>
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" alignItems="center">
           <Flex flexDirection="row" justifyContent="flex-end">
             <SortBy onSort={this.handleSort} />
           </Flex>
-          <Flex as="ul" flexDirection="column">
-            {articles.map(article => (
-              <ArticleItem
-                path={`${uri}/articles/${article.article_id}/comments`}
-                onArticleUpdate={this.handleArticleUpdate}
-                key={article.article_id}
-                article={article}
-              />
-            ))}
-          </Flex>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Flex as="ul" flexDirection="column">
+              {articles.map(article => (
+                <ArticleItem
+                  path={`${uri}/articles/${article.article_id}/comments`}
+                  onArticleUpdate={this.handleArticleUpdate}
+                  key={article.article_id}
+                  article={article}
+                />
+              ))}
+            </Flex>
+          )}
         </Flex>
       </>
     );
