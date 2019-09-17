@@ -4,6 +4,7 @@ import { Router, navigate } from "@reach/router";
 import api from "../api";
 import ArticleVotes from "./ArticleVotes";
 import CommentsList from "../comments/CommentsList";
+import Spinner from "../common/Spinner";
 
 class Article extends Component {
   state = {
@@ -29,7 +30,7 @@ class Article extends Component {
       const article = await api.getArticleById(article_id);
       this.setState({ article, isLoading: false });
     } catch (err) {
-      this.setState({ err });
+      this.setState({ err, isLoading: false });
     }
   };
 
@@ -59,16 +60,15 @@ class Article extends Component {
     const { article, err, isLoading } = this.state;
     const { user } = this.props;
     if (err) return <div>Invalid article</div>;
-    if (isLoading) return <p>LOADING</p>;
-    const {
-      body,
-      author,
-      comment_count,
-      created_at,
-      title,
-      topic,
-      votes
-    } = article;
+    // const {
+    //   body,
+    //   author,
+    //   comment_count,
+    //   created_at,
+    //   title,
+    //   topic,
+    //   votes
+    // } = article;
 
     return (
       <Flex
@@ -108,18 +108,24 @@ class Article extends Component {
             as="section"
             flexDirection="row"
           >
-            <ArticleVotes
-              onUpvote={this.handleUpvote}
-              onDownvote={this.handleDownvote}
-              votes={votes}
-            />
-            <Flex as="div" flexDirection="column">
-              <Text as="h1">{title}</Text>
-              <p>{body}</p>
-              <Router>
-                <CommentsList user={user} path="/comments" />
-              </Router>
-            </Flex>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                <ArticleVotes
+                  onUpvote={this.handleUpvote}
+                  onDownvote={this.handleDownvote}
+                  votes={article.votes}
+                />
+                <Flex as="div" flexDirection="column">
+                  <Text as="h1">{article.title}</Text>
+                  <p>{article.body}</p>
+                  <Router>
+                    <CommentsList user={user} path="/comments" />
+                  </Router>
+                </Flex>
+              </>
+            )}
           </Flex>
         </Flex>
       </Flex>
