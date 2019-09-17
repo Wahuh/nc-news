@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Flex, Text, Box } from "rebass";
-import { Router } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 import api from "../../../api";
 import ArticleVotes from "../ArticleVotes";
 import CommentsList from "../../../comments/components/CommentsList";
@@ -8,6 +8,7 @@ import CommentsList from "../../../comments/components/CommentsList";
 class Article extends Component {
   state = {
     article: null,
+    isLoading: true,
     err: null
   };
 
@@ -26,9 +27,17 @@ class Article extends Component {
     const { article_id } = this.props;
     try {
       const article = await api.getArticleById(article_id);
-      this.setState({ article });
+      this.setState({ article, isLoading: false });
     } catch (err) {
       this.setState({ err });
+    }
+  };
+
+  goBackToArticles = e => {
+    e.preventDefault();
+    if (e.target === e.currentTarget) {
+      const { topic } = this.props;
+      navigate(`/t/${topic}`);
     }
   };
 
@@ -47,10 +56,11 @@ class Article extends Component {
   };
 
   render() {
-    const { article, err } = this.state;
+    const { article, err, isLoading } = this.state;
     const { user } = this.props;
+    console.log(this.props);
     if (err) return <div>Invalid article</div>;
-    if (!article) return null;
+    if (isLoading) return <p>LOADING</p>;
     const {
       body,
       author,
@@ -60,19 +70,58 @@ class Article extends Component {
       topic,
       votes
     } = article;
+
     return (
-      <Flex as="section" flexDirection="row">
-        <ArticleVotes
-          onUpvote={this.handleUpvote}
-          onDownvote={this.handleDownvote}
-          votes={votes}
-        />
-        <Flex as="div" flexDirection="column">
-          <Text as="h1">{title}</Text>
-          <p>{body}</p>
-          <Router>
-            <CommentsList user={user} path="/comments" />
-          </Router>
+      <Flex
+        sx={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          left: 0,
+          zIndex: 1
+        }}
+      >
+        <Flex
+          onClick={this.goBackToArticles}
+          flexDirection="column"
+          alignItems="center"
+          sx={{
+            height: "100%",
+            width: "100%",
+            position: "relative",
+            "&::before": {
+              width: "100%",
+              height: "100%",
+              content: "''",
+              position: "absolute",
+              opacity: 0.8,
+              backgroundColor: "black"
+            }
+          }}
+        >
+          <Flex
+            sx={{
+              width: "100%",
+              maxWidth: "1024px",
+              backgroundColor: "white",
+              zIndex: 1
+            }}
+            as="section"
+            flexDirection="row"
+          >
+            <ArticleVotes
+              onUpvote={this.handleUpvote}
+              onDownvote={this.handleDownvote}
+              votes={votes}
+            />
+            <Flex as="div" flexDirection="column">
+              <Text as="h1">{title}</Text>
+              <p>{body}</p>
+              <Router>
+                <CommentsList user={user} path="/comments" />
+              </Router>
+            </Flex>
+          </Flex>
         </Flex>
       </Flex>
     );
