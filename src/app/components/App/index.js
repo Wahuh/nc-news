@@ -37,7 +37,7 @@ class App extends Component {
         <Flex
           flexDirection="column"
           alignItems="center"
-          sx={{ flex: 1 }}
+          sx={{ flex: 1, position: "relative", marginTop: "50px" }}
           as="main"
         >
           <Router>
