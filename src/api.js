@@ -25,6 +25,10 @@ const getArticleById = async article_id => {
   return article;
 };
 
+const deleteCommentById = async comment_id => {
+  await instance.delete(`/comments/${comment_id}`);
+};
+
 const getCommentsByArticleId = async article_id => {
   const {
     data: { comments }
@@ -48,6 +52,7 @@ const getTopics = () => {
 };
 
 export default {
+  deleteCommentById,
   getCommentsByArticleId,
   getArticleById,
   getArticles,

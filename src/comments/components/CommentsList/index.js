@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Flex } from "rebass";
 import api from "../../../api";
 import PostCommentForm from "../PostCommentForm";
+import CommentItem from "../CommentItem";
 
 class CommentsList extends Component {
   state = {
@@ -20,9 +21,23 @@ class CommentsList extends Component {
     }));
   };
 
+  handleDeleteComment = async comment_id => {
+    try {
+      await api.deleteCommentById(comment_id);
+      this.setState(currentState => ({
+        comments: currentState.comments.filter(
+          comment => comment.comment_id !== comment_id
+        )
+      }));
+    } catch (err) {
+      console.log("oh dear", err);
+    }
+  };
+
   render() {
     const { comments } = this.state;
     const { user, article_id } = this.props;
+    const { username } = user;
     return (
       <div>
         <PostCommentForm
@@ -31,15 +46,14 @@ class CommentsList extends Component {
           onPostComment={this.handlePostComment}
         />
         <Flex flexDirection="column">
-          {comments.map(comment => {
-            const { votes, author, created_at, comment_id, body } = comment;
-            return (
-              <li>
-                {author}
-                {body}
-              </li>
-            );
-          })}
+          {comments.map(comment => (
+            <CommentItem
+              key={comment.comment_id}
+              onDelete={this.handleDeleteComment}
+              canBeDeleted={username === comment.author}
+              comment={comment}
+            />
+          ))}
         </Flex>
       </div>
     );
