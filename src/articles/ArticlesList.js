@@ -3,9 +3,9 @@ import { Router } from "@reach/router";
 import { Flex } from "rebass";
 import ArticleItem from "./ArticleItem";
 import SortBy from "./SortBy";
-import api from "../../api";
+import api from "../api";
 import Article from "./Article";
-import ErrorPage from "../../errors/components/ErrorPage";
+import ErrorPage from "../errors/ErrorPage";
 
 class ArticlesList extends Component {
   state = {

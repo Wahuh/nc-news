@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Flex, Box, Button, Text } from "rebass";
-import api from "../../api";
+import api from "../api";
 
 class PostCommentForm extends Component {
   state = {

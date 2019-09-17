@@ -1,6 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
-import ArticlesList from "../../../articles/components/ArticlesList";
+import ArticlesList from "../articles/ArticlesList";
 
 const Topic = ({ user, topic }) => {
   return (

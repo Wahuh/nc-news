@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Flex } from "rebass";
 import { Link } from "@reach/router";
-import api from "../../../api";
+import api from "../api";
 
 class SuggestedTopics extends Component {
   state = {

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import { Flex, Text } from "rebass";
 import ArticleVotes from "./ArticleVotes";
-import api from "../../api";
+import api from "../api";
 
 const ArticleItem = ({ article, onArticleUpdate, path }) => {
   const {

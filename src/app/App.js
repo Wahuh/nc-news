@@ -3,14 +3,12 @@ import { Location, Router } from "@reach/router";
 import { Flex } from "rebass";
 import "./App.css";
 import Header from "./Header";
-import Home from "../../home/components/Home";
+import Home from "../home/Home";
 import NavigationDropdown from "./NavigationDropdown";
-import Topic from "../../topics/components/Topic";
-import Article from "../../articles/components/Article";
-import CommentsList from "../../comments/components/CommentsList";
-import UserDetails from "../../user/components/UserDetails";
-import api from "../../api";
-import ErrorPage from "../../errors/components/ErrorPage";
+import Topic from "../topics/Topic";
+import UserDetails from "../user/UserDetails";
+import api from "../api";
+import ErrorPage from "../errors/ErrorPage";
 
 class App extends Component {
   state = {
