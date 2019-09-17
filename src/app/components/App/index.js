@@ -42,11 +42,7 @@ class App extends Component {
         >
           <Router>
             <Home path="/" />
-            <Topic path="/t/:topic">
-              <Article path="/articles/:article_id">
-                <CommentsList path="comments" user={user} />
-              </Article>
-            </Topic>
+            <Topic user={user} path="/t/:topic/*" />
             <ErrorPage default />
           </Router>
         </Flex>

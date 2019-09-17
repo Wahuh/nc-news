@@ -1,12 +1,12 @@
 import React from "react";
+import { Router } from "@reach/router";
 import ArticlesList from "../../../articles/components/ArticlesList";
 
-const Topic = ({ children, topic }) => {
+const Topic = ({ user, topic }) => {
   return (
-    <>
-      {children}
-      <ArticlesList topic={topic} />
-    </>
+      <Router>
+        <ArticlesList path="/*" user={user} topic={topic} />
+      </Router>
   );
 };
 
