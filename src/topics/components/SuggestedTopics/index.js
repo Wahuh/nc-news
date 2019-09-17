@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Flex } from "rebass";
-import { Link } from '@reach/router'
-import data from "../../../data/topics.json";
+import { Link } from "@reach/router";
+import api from "../../../api";
 
 class SuggestedTopics extends Component {
   state = {
-    topics: data.topics
+    topics: []
   };
+  async componentDidMount() {
+    const topics = await api.getTopics();
+    this.setState({ topics });
+  }
   render() {
     const { topics } = this.state;
     return (

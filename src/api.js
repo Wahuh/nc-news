@@ -54,8 +54,11 @@ const patchArticle = async ({ article_id, ...rest }) => {
   return article;
 };
 
-const getTopics = () => {
-  instance.get("/topics").then(response => console.log(response.data));
+const getTopics = async () => {
+  const {
+    data: { topics }
+  } = await instance.get("/topics");
+  return topics;
 };
 
 export default {
