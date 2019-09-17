@@ -6,6 +6,7 @@ import SortBy from "../SortBy/index.js";
 import api from "../../../api.js";
 import Article from "../Article/index.js";
 import CommentsList from "../../../comments/components/CommentsList/index.js";
+import ErrorPage from "../../../errors/components/ErrorPage/index.js";
 
 class ArticlesList extends Component {
   state = {
@@ -53,20 +54,21 @@ class ArticlesList extends Component {
   };
 
   render() {
-    const { user, uri } = this.props;
+    const { user, uri, topic } = this.props;
     const { articles, err } = this.state;
-    if (err) return <div>OH NOOOOO</div>;
+    if (err) return <ErrorPage />;
 
     return (
       <>
         <Router>
           <Article
+            topic={topic}
             onArticleUpdate={this.handleArticleUpdate}
             user={user}
             path="/articles/:article_id/*"
           />
         </Router>
-        <Flex sx={{ position: "relative" }} flexDirection="column">
+        <Flex flexDirection="column">
           <Flex flexDirection="row" justifyContent="flex-end">
             <SortBy onSort={this.handleSort} />
           </Flex>
