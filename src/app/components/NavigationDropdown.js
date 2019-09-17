@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Box } from "rebass";
-import SuggestedTopics from "../../../topics/components/SuggestedTopics";
+import SuggestedTopics from "../../topics/components/SuggestedTopics";
 
 class NavigationDropdown extends Component {
   state = {

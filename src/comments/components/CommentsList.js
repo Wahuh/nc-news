@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Flex } from "rebass";
-import api from "../../../api";
-import PostCommentForm from "../PostCommentForm";
-import CommentItem from "../CommentItem";
+import api from "../../api";
+import PostCommentForm from "./PostCommentForm";
+import CommentItem from "./CommentItem";
 
 class CommentsList extends Component {
   state = {

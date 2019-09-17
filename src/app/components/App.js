@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { Location, Router } from "@reach/router";
 import { Flex } from "rebass";
 import "./App.css";
-import Header from "../Header";
-import Home from "../../../home/components/Home";
-import NavigationDropdown from "../NavigationDropdown";
-import Topic from "../../../topics/components/Topic";
-import Article from "../../../articles/components/Article";
-import CommentsList from "../../../comments/components/CommentsList";
-import UserDetails from "../../../user/components/UserDetails";
-import api from "../../../api";
-import ErrorPage from "../../../errors/components/ErrorPage";
+import Header from "./Header";
+import Home from "../../home/components/Home";
+import NavigationDropdown from "./NavigationDropdown";
+import Topic from "../../topics/components/Topic";
+import Article from "../../articles/components/Article";
+import CommentsList from "../../comments/components/CommentsList";
+import UserDetails from "../../user/components/UserDetails";
+import api from "../../api";
+import ErrorPage from "../../errors/components/ErrorPage";
 
 class App extends Component {
   state = {

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import { Flex } from "rebass";
-import ArticleItem from "../ArticleItem/index.js";
-import SortBy from "../SortBy/index.js";
-import api from "../../../api.js";
-import Article from "../Article/index.js";
-import CommentsList from "../../../comments/components/CommentsList/index.js";
-import ErrorPage from "../../../errors/components/ErrorPage/index.js";
+import ArticleItem from "./ArticleItem";
+import SortBy from "./SortBy";
+import api from "../../api";
+import Article from "./Article";
+import ErrorPage from "../../errors/components/ErrorPage";
 
 class ArticlesList extends Component {
   state = {

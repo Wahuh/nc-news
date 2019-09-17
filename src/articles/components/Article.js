@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Flex, Text, Box } from "rebass";
 import { Router, navigate } from "@reach/router";
-import api from "../../../api";
-import ArticleVotes from "../ArticleVotes";
-import CommentsList from "../../../comments/components/CommentsList";
+import api from "../../api";
+import ArticleVotes from "./ArticleVotes";
+import CommentsList from "../../comments/components/CommentsList";
 
 class Article extends Component {
   state = {
