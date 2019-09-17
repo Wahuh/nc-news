@@ -58,7 +58,6 @@ class Article extends Component {
   render() {
     const { article, err, isLoading } = this.state;
     const { user } = this.props;
-    console.log(this.props);
     if (err) return <div>Invalid article</div>;
     if (isLoading) return <p>LOADING</p>;
     const {
