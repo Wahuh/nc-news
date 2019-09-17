@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Flex, Text, Box } from "rebass";
+import { Router } from "@reach/router";
 import api from "../../../api";
 import ArticleVotes from "../ArticleVotes";
+import CommentsList from "../../../comments/components/CommentsList";
 
 class Article extends Component {
   state = {
@@ -10,6 +12,17 @@ class Article extends Component {
   };
 
   async componentDidMount() {
+    await this.fetchArticle();
+  }
+
+  async componentDidUpdate(prevProps) {
+    const { article_id } = this.props;
+    if (prevProps.article_id !== article_id) {
+      await this.fetchArticle();
+    }
+  }
+
+  fetchArticle = async () => {
     const { article_id } = this.props;
     try {
       const article = await api.getArticleById(article_id);
@@ -17,11 +30,25 @@ class Article extends Component {
     } catch (err) {
       this.setState({ err });
     }
-  }
+  };
+
+  handleUpvote = async () => {
+    const { onArticleUpdate, article_id } = this.props;
+    const article = await api.patchArticle({ article_id, inc_votes: 1 });
+    this.setState({ article });
+    onArticleUpdate(article);
+  };
+
+  handleDownvote = async () => {
+    const { onArticleUpdate, article_id } = this.props;
+    const article = await api.patchArticle({ article_id, inc_votes: -1 });
+    this.setState({ article });
+    onArticleUpdate(article);
+  };
 
   render() {
     const { article, err } = this.state;
-    const { children } = this.props;
+    const { user, onUpvote, onDownvote, article_id } = this.props;
     if (err) return <div>Invalid article</div>;
     if (!article) return null;
     const {
@@ -35,11 +62,17 @@ class Article extends Component {
     } = article;
     return (
       <Flex as="section" flexDirection="row">
-        <ArticleVotes votes={votes} />
+        <ArticleVotes
+          onUpvote={this.handleUpvote}
+          onDownvote={this.handleDownvote}
+          votes={votes}
+        />
         <Flex as="div" flexDirection="column">
           <Text as="h1">{title}</Text>
           <p>{body}</p>
-          {children}
+          <Router>
+            <CommentsList user={user} path="/comments" />
+          </Router>
         </Flex>
       </Flex>
     );

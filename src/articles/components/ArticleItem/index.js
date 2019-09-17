@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "@reach/router";
 import { Flex, Text } from "rebass";
 import ArticleVotes from "../ArticleVotes";
+import api from "../../../api";
 
-const ArticleItem = ({ article, onUpvote, onDownvote }) => {
+const ArticleItem = ({ article, onArticleUpdate, path }) => {
   const {
     article_id,
     title,
@@ -12,20 +13,31 @@ const ArticleItem = ({ article, onUpvote, onDownvote }) => {
     comment_count,
     author
   } = article;
+
+  const handleUpvote = async () => {
+    const article = await api.patchArticle({ article_id, inc_votes: 1 });
+    onArticleUpdate(article);
+  };
+
+  const handleDownvote = async () => {
+    const article = await api.patchArticle({ article_id, inc_votes: -1 });
+    onArticleUpdate(article);
+  };
+
   return (
     <Flex flexDirection="row" as="li">
-      <ArticleVotes
-        onUpvote={() => onUpvote(article_id)}
-        onDownvote={() => onDownvote(article_id)}
-        votes={votes}
-      />
-      <Flex flexDirection="column">
-        <Text>Posted by {author}</Text>
-        <Text>{title}</Text>
-        <Text>{comment_count} comments</Text>
-      </Flex>
-      {/* <Link> */}
-      {/* </Link> */}
+      <Link to={path}>
+        <ArticleVotes
+          onUpvote={handleUpvote}
+          onDownvote={handleDownvote}
+          votes={votes}
+        />
+        <Flex flexDirection="column">
+          <Text>Posted by {author}</Text>
+          <Text>{title}</Text>
+          <Text>{comment_count} comments</Text>
+        </Flex>
+      </Link>
     </Flex>
   );
 };
