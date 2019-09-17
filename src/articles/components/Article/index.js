@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Flex, Text } from "rebass";
+import { Flex, Text, Box } from "rebass";
 import api from "../../../api";
+import ArticleVotes from "../ArticleVotes";
 
 class Article extends Component {
   state = {
@@ -23,12 +24,23 @@ class Article extends Component {
     const { children } = this.props;
     if (err) return <div>Invalid article</div>;
     if (!article) return null;
-    const { body, author, comment_count, created_at, title, topic } = article;
+    const {
+      body,
+      author,
+      comment_count,
+      created_at,
+      title,
+      topic,
+      votes
+    } = article;
     return (
-      <Flex as="section" flexDirection="column">
-        <Text as="h1">{title}</Text>
-        <p>{body}</p>
-        {children}
+      <Flex as="section" flexDirection="row">
+        <ArticleVotes votes={votes} />
+        <Flex as="div" flexDirection="column">
+          <Text as="h1">{title}</Text>
+          <p>{body}</p>
+          {children}
+        </Flex>
       </Flex>
     );
   }

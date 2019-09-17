@@ -34,6 +34,27 @@ class ArticlesList extends Component {
     }
   }
 
+  handleUpvote = async article_id => {
+    const article = await api.patchArticle({ article_id, inc_votes: 1 });
+    this.updateArticles(article);
+  };
+
+  handleDownvote = async article_id => {
+    const article = await api.patchArticle({ article_id, inc_votes: -1 });
+    this.updateArticles(article);
+  };
+
+  updateArticles(newArticle) {
+    this.setState(currentState => {
+      const updatedArticles = currentState.articles.map(article =>
+        article.article_id === newArticle.article_id ? newArticle : article
+      );
+      return {
+        articles: updatedArticles
+      };
+    });
+  }
+
   handleSort = sortBy => {
     this.setState({ sortBy });
   };
@@ -49,7 +70,12 @@ class ArticlesList extends Component {
         </Flex>
         <Flex as="ul" flexDirection="column">
           {articles.map(article => (
-            <ArticleItem key={article.article_id} article={article} />
+            <ArticleItem
+              onUpvote={this.handleUpvote}
+              onDownvote={this.handleDownvote}
+              key={article.article_id}
+              article={article}
+            />
           ))}
         </Flex>
       </Flex>

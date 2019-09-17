@@ -47,11 +47,19 @@ const getArticles = async query => {
   return articles;
 };
 
+const patchArticle = async ({ article_id, ...rest }) => {
+  const {
+    data: { article }
+  } = await instance.patch(`/articles/${article_id}`, rest);
+  return article;
+};
+
 const getTopics = () => {
   instance.get("/topics").then(response => console.log(response.data));
 };
 
 export default {
+  patchArticle,
   deleteCommentById,
   getCommentsByArticleId,
   getArticleById,
