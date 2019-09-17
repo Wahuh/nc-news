@@ -16,7 +16,7 @@ class SuggestedTopics extends Component {
     return (
       <Flex flexDirection="column">
         {topics.map(({ slug }) => (
-          <li>
+          <li key={slug}>
             <Link to={`/t/${slug}`}>{slug}</Link>
           </li>
         ))}
