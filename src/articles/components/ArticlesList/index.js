@@ -31,7 +31,6 @@ class ArticlesList extends Component {
     const { sortBy } = this.state;
     try {
       const articles = await api.getArticles({ topic, sort_by: sortBy });
-      console.log(articles);
       this.setState({ articles });
     } catch (err) {
       this.setState({ err });

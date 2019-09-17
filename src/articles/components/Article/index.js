@@ -48,7 +48,7 @@ class Article extends Component {
 
   render() {
     const { article, err } = this.state;
-    const { user, onUpvote, onDownvote, article_id } = this.props;
+    const { user } = this.props;
     if (err) return <div>Invalid article</div>;
     if (!article) return null;
     const {
