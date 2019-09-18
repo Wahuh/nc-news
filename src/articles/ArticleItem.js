@@ -15,16 +15,6 @@ const ArticleItem = ({ article, onArticleUpdate, path }) => {
     author
   } = article;
 
-  const handleUpvote = async e => {
-    const article = await api.patchArticle({ article_id, inc_votes: 1 });
-    onArticleUpdate(article);
-  };
-
-  const handleDownvote = async e => {
-    const article = await api.patchArticle({ article_id, inc_votes: -1 });
-    onArticleUpdate(article);
-  };
-
   return (
     <Flex
       flex={1}
@@ -60,8 +50,6 @@ const ArticleItem = ({ article, onArticleUpdate, path }) => {
       >
         <ArticleVotes
           article_id={article_id}
-          onUpvote={handleUpvote}
-          onDownvote={handleDownvote}
           votes={votes}
         />
         <Flex

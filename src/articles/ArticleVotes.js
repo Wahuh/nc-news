@@ -4,21 +4,35 @@ import UpIcon from "../common/UpIcon";
 import DownIcon from "../common/DownIcon";
 import VoteButton from "./VoteButton";
 import api from "../api";
+import Toast from "../common/Toast";
 
 class ArticleVotes extends Component {
   state = {
-    change: 0
+    change: 0,
+    err: null
   };
 
   handleVote = async voteDiff => {
-    const { article_id } = this.props;
+    const { article_id, onArticleUpdate } = this.props;
     this.setState(currentState => ({ change: currentState.change + voteDiff }));
-    await api.patchArticle({ article_id, inc_votes: voteDiff });
+    const article = await api
+      .patchArticle({ article_id, inc_votes: voteDiff })
+      .catch(err => {
+        this.setState(currentState => ({
+          err,
+          change: currentState.change - voteDiff
+        }));
+      });
+    onArticleUpdate && onArticleUpdate(article);
+  };
+
+  clearError = () => {
+    this.setState({ err: null });
   };
 
   render() {
     const { votes } = this.props;
-    const { change } = this.state;
+    const { change, err } = this.state;
     return (
       <Flex
         flexDirection="column"
@@ -32,6 +46,12 @@ class ArticleVotes extends Component {
         <VoteButton onClick={() => this.handleVote(-1)}>
           <DownIcon />
         </VoteButton>
+        {err && (
+          <Toast
+            onClose={this.clearError}
+            message="Oops! There was a problem updating your vote."
+          />
+        )}
       </Flex>
     );
   }

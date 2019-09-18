@@ -44,7 +44,7 @@ class Article extends Component {
 
   render() {
     const { article, err, isLoading } = this.state;
-    const { user, article_id } = this.props;
+    const { user, article_id, onArticleUpdate } = this.props;
     if (err) return <div>Invalid article</div>;
     // const {
     //   body,
@@ -87,7 +87,7 @@ class Article extends Component {
           <Flex
             sx={{
               width: "100%",
-              maxWidth: "1024px",
+              maxWidth: "700px",
               backgroundColor: "white",
               zIndex: 1
             }}
@@ -98,8 +98,12 @@ class Article extends Component {
               <Spinner />
             ) : (
               <>
-                <ArticleVotes article_id={article_id} votes={article.votes} />
-                <Flex as="div" flexDirection="column">
+                <ArticleVotes
+                  onArticleUpdate={onArticleUpdate}
+                  article_id={article_id}
+                  votes={article.votes}
+                />
+                <Flex flex={1} as="div" flexDirection="column">
                   <Text as="h1">{article.title}</Text>
                   <p>{article.body}</p>
                   <Router>
