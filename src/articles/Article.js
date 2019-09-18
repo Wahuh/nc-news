@@ -118,7 +118,7 @@ class Article extends Component {
                   <Text mb={5} as="h1">
                     {article.title}
                   </Text>
-                  <Text mb={3} as="p">
+                  <Text color="body" mb={5} as="p">
                     {article.body}
                   </Text>
                   <Flex mb={6}>
