@@ -56,7 +56,7 @@ class ArticlesList extends Component {
   };
 
   render() {
-    const { user, uri, topic } = this.props;
+    const { user, topic } = this.props;
     const { articles, err, isLoading } = this.state;
     if (err) return <ErrorPage />;
 
@@ -80,7 +80,7 @@ class ArticlesList extends Component {
             <Flex as="ul" sx={{ maxWidth: "650px" }} flexDirection="column">
               {articles.map(article => (
                 <ArticleItem
-                  path={`${uri}/articles/${article.article_id}/comments`}
+                  path={`/t/${article.topic}/articles/${article.article_id}/comments`}
                   key={article.article_id}
                   article={article}
                   onArticleUpdate={this.handleArticleUpdate}
