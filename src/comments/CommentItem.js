@@ -1,11 +1,7 @@
 import React from "react";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
 import { Button, Flex, Text } from "rebass";
 import CommentVotes from "./CommentVotes";
-
-TimeAgo.addLocale(en);
-const timeAgo = new TimeAgo("en-UK");
+import DateTimeAgo from "../common/DateTimeAgo";
 
 const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
   const { votes, author, created_at, comment_id, body } = comment;
@@ -29,12 +25,10 @@ const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
       flexDirection="column"
     >
       <Flex mb={3} flexDirection="column">
-        <Text as="p" mb={1} fontSize={2}>
+        <Text color="link" as="p" mb={1} fontSize={2}>
           {author}
         </Text>
-        <Text color="caption" fontSize={1}>
-          {timeAgo.format(new Date(created_at))}
-        </Text>
+        <DateTimeAgo date={created_at} />
       </Flex>
       <Text mb={4} fontSize={3} color="body">
         {body}
@@ -52,7 +46,6 @@ const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
               color="action"
               fontWeight={600}
               letterSpacing={1}
-              fontFamily="inherit"
             >
               DELETE COMMENT
             </Button>

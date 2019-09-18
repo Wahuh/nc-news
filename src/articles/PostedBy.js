@@ -1,10 +1,15 @@
 import React from "react";
 import { Text } from "rebass";
+import DateTimeAgo from "../common/DateTimeAgo";
 
-const PostedBy = ({ author }) => {
+const PostedBy = ({ author, date }) => {
   return (
     <Text color="caption" fontSize={1}>
-      Posted by {author}
+      Posted by{" "}
+      <Text as="span" fontSize={1} color="link">
+        {author}
+      </Text>{" "}
+      <DateTimeAgo date={date} />
     </Text>
   );
 };

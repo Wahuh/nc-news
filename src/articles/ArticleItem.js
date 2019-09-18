@@ -57,7 +57,7 @@ const ArticleItem = ({ article, path }) => {
           flexDirection="column"
         >
           <Flex flexDirection="column" mb={6}>
-            <PostedBy author={author} />
+            <PostedBy author={author} date={created_at} />
             <Text color="header" fontWeight="heading" fontSize={5}>
               {title}
             </Text>
