@@ -6,8 +6,13 @@ import ArticlesList from "../articles/ArticlesList";
 const Topic = ({ user, topic }) => {
   return (
     <Flex flexDirection="column" alignItems="center">
-      <Flex sx={{ width: "100%", backgroundColor: "red", height: "100px" }}>
-        <Text>{`t/${topic}`}</Text>
+      <Flex
+        flexDirection="row"
+        alignItems="center"
+        paddingX={6}
+        sx={{ width: "100%", backgroundColor: "banner", height: "75px" }}
+      >
+        <Text color="fg" fontWeight={600} fontSize={6}>{`t/${topic}`}</Text>
       </Flex>
       <Router>
         <ArticlesList path="/*" user={user} topic={topic} />

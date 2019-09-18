@@ -10,6 +10,7 @@ export default {
   colors: {
     fg: "white",
     bg: "#f2f2f2",
+    banner: "#20232a",
     form: "rgb(246,247,248)",
     header: "rgba(0,0,0,.84)",
     body: "rgba(0,0,0,.84)",
