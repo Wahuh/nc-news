@@ -1,7 +1,5 @@
 import React from "react";
-import { Location } from "@reach/router";
 import { Flex } from "rebass";
-import NavigationDropdown from "./NavigationDropdown";
 import UserDetails from "../user/UserDetails";
 
 const Header = ({ user }) => {
@@ -19,9 +17,6 @@ const Header = ({ user }) => {
       as="header"
       flexDirection="row"
     >
-      <Location>
-        {({ location }) => <NavigationDropdown path={location.pathname} />}
-      </Location>
       <UserDetails user={user} />
     </Flex>
   );
