@@ -46,6 +46,7 @@ const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
               color="action"
               fontWeight={600}
               letterSpacing={1}
+              onClick={e => e.stopPropagation()}
             >
               DELETE COMMENT
             </Button>

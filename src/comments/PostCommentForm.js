@@ -15,7 +15,6 @@ class PostCommentForm extends Component {
   };
 
   handleSubmit = async e => {
-    console.log("event");
     e.preventDefault();
     const {
       article_id,
@@ -33,10 +32,11 @@ class PostCommentForm extends Component {
     const { username } = this.props.user;
     return (
       <Flex
+        width="100%"
         mb={7}
-        onSubmit={this.handleSubmit}
         as="form"
         flexDirection="column"
+        onSubmit={this.handleSubmit}
       >
         <Text as="label" htmlFor="comment" mb={2} fontSize={2}>
           Comment as{" "}
@@ -68,7 +68,7 @@ class PostCommentForm extends Component {
               fontFamily: "inherit"
             }}
             padding={3}
-          ></Box>
+          />
           <Flex
             paddingX={3}
             paddingY={3}
@@ -82,6 +82,8 @@ class PostCommentForm extends Component {
               fontSize={2}
               fontWeight={600}
               backgroundColor="action"
+              type="submit"
+              onClick={e => e.stopPropagation()}
             >
               POST COMMENT
             </Button>
