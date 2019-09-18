@@ -15,6 +15,7 @@ class PostCommentForm extends Component {
   };
 
   handleSubmit = async e => {
+    console.log("event");
     e.preventDefault();
     const {
       article_id,
@@ -37,7 +38,7 @@ class PostCommentForm extends Component {
         as="form"
         flexDirection="column"
       >
-        <Text mb={2} fontSize={2}>
+        <Text as="label" htmlFor="comment" mb={2} fontSize={2}>
           Comment as{" "}
           <Text fontSize={2} color="link" as="span">
             {username}
@@ -54,6 +55,8 @@ class PostCommentForm extends Component {
           flexDirection="column"
         >
           <Box
+            id="comment"
+            name="comment"
             rows={5}
             onChange={this.handleChange}
             as="textarea"
@@ -79,7 +82,6 @@ class PostCommentForm extends Component {
               fontSize={2}
               fontWeight={600}
               backgroundColor="action"
-              sx={{ fontFamily: "inherit" }}
             >
               POST COMMENT
             </Button>
