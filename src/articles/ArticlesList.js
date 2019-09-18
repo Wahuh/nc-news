@@ -79,7 +79,8 @@ class ArticlesList extends Component {
           ) : (
             <Flex
               as="ul"
-              padding={0}
+              paddingX={4}
+              mb={7}
               sx={{ maxWidth: "650px" }}
               flexDirection="column"
             >
