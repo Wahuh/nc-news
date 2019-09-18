@@ -1,10 +1,15 @@
 import React from "react";
-import { Link } from "@reach/router";
 import { Flex, Text } from "rebass";
-import { Cat } from "react-kawaii";
 import ActionLink from "../common/ActionLink";
+import Error404 from "./Error404";
+import Error500 from "./Error500";
 
-const ErrorPage = () => {
+const errorComponents = {
+  404: <Error404 />,
+  500: <Error500 />
+};
+
+const ErrorPage = ({ code, message }) => {
   return (
     <Flex
       flexDirection="column"
@@ -13,15 +18,15 @@ const ErrorPage = () => {
       sx={{ height: "100%" }}
     >
       <Text fontSize={16} lineHeight={1.1} fontWeight={600}>
-        404
+        {code || 404}
       </Text>
       <Text color="body" mb={4} fontSize={3} letterSpacing={1} fontWeight={600}>
-        PAGE NOT FOUND
+        {message || "PAGE NOT FOUND"}
       </Text>
       <Flex mb={7}>
         <ActionLink to="/">GO HOME</ActionLink>
       </Flex>
-      <Cat size={200} mood="sad" color="hotpink" />
+      {code ? errorComponents[code] : errorComponents[500]}
     </Flex>
   );
 };
