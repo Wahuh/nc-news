@@ -81,7 +81,6 @@ class ArticlesList extends Component {
               {articles.map(article => (
                 <ArticleItem
                   path={`${uri}/articles/${article.article_id}/comments`}
-                  onArticleUpdate={this.handleArticleUpdate}
                   key={article.article_id}
                   article={article}
                 />

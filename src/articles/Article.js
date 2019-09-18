@@ -42,23 +42,9 @@ class Article extends Component {
     }
   };
 
-  handleUpvote = async () => {
-    const { onArticleUpdate, article_id } = this.props;
-    const article = await api.patchArticle({ article_id, inc_votes: 1 });
-    this.setState({ article });
-    onArticleUpdate(article);
-  };
-
-  handleDownvote = async () => {
-    const { onArticleUpdate, article_id } = this.props;
-    const article = await api.patchArticle({ article_id, inc_votes: -1 });
-    this.setState({ article });
-    onArticleUpdate(article);
-  };
-
   render() {
     const { article, err, isLoading } = this.state;
-    const { user } = this.props;
+    const { user, article_id } = this.props;
     if (err) return <div>Invalid article</div>;
     // const {
     //   body,
@@ -112,11 +98,7 @@ class Article extends Component {
               <Spinner />
             ) : (
               <>
-                <ArticleVotes
-                  onUpvote={this.handleUpvote}
-                  onDownvote={this.handleDownvote}
-                  votes={article.votes}
-                />
+                <ArticleVotes article_id={article_id} votes={article.votes} />
                 <Flex as="div" flexDirection="column">
                   <Text as="h1">{article.title}</Text>
                   <p>{article.body}</p>
