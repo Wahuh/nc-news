@@ -1,4 +1,5 @@
 import axios from "axios";
+import { async } from "q";
 
 const instance = axios.create({
   baseURL: "https://speedwagon-server.herokuapp.com/api"
@@ -61,8 +62,16 @@ const getTopics = async () => {
   return topics;
 };
 
+const patchComment = async ({ comment_id, ...rest }) => {
+  const {
+    data: { comment }
+  } = await instance.patch(`/comments/${comment_id}`, rest);
+  return comment;
+};
+
 export default {
   patchArticle,
+  patchComment,
   deleteCommentById,
   getCommentsByArticleId,
   getArticleById,
