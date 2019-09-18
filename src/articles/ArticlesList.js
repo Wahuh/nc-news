@@ -77,7 +77,7 @@ class ArticlesList extends Component {
           {isLoading ? (
             <Spinner />
           ) : (
-            <Flex as="ul" flexDirection="column">
+            <Flex as="ul" sx={{ maxWidth: "650px" }} flexDirection="column">
               {articles.map(article => (
                 <ArticleItem
                   path={`${uri}/articles/${article.article_id}/comments`}

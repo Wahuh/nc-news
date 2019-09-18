@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import { Flex, Text, Link as RebassLink } from "rebass";
 import ArticleVotes from "./ArticleVotes";
 import api from "../api";
+import CommentsCount from "./CommentsCount";
 
 const ArticleItem = ({ article, onArticleUpdate, path }) => {
   const {
@@ -25,7 +26,13 @@ const ArticleItem = ({ article, onArticleUpdate, path }) => {
   };
 
   return (
-    <Flex flex={1} as="li">
+    <Flex
+      flex={1}
+      backgroundColor="fg"
+      sx={{ border: "1px solid rgb(204,204,204)", borderRadius: "4px" }}
+      as="li"
+      mb={4}
+    >
       <RebassLink
         onClick={e => {
           if (
@@ -38,17 +45,41 @@ const ArticleItem = ({ article, onArticleUpdate, path }) => {
         }}
         as={Link}
         to={path}
-        sx={{ textDecoration: "none", display: "flex", flexDirection: "row" }}
+        sx={{
+          flex: 1,
+          textDecoration: "none",
+          display: "flex",
+          flexDirection: "row",
+          "&:focus": {
+            color: "green"
+          },
+          "&:active": {
+            color: "none"
+          }
+        }}
       >
         <ArticleVotes
+          article_id={article_id}
           onUpvote={handleUpvote}
           onDownvote={handleDownvote}
           votes={votes}
         />
-        <Flex flexDirection="column">
-          <Text>Posted by {author}</Text>
-          <Text>{title}</Text>
-          <Text>{comment_count} comments</Text>
+        <Flex
+          paddingX={5}
+          paddingY={3}
+          flex={1}
+          justifyContent="space-between"
+          flexDirection="column"
+        >
+          <Flex flexDirection="column" mb={6}>
+            <Text color="caption" fontSize={1}>
+              Posted by {author}
+            </Text>
+            <Text color="header" fontWeight="heading" fontSize={5}>
+              {title}
+            </Text>
+          </Flex>
+          <CommentsCount count={comment_count} />
         </Flex>
       </RebassLink>
     </Flex>
