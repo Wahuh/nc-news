@@ -25,16 +25,11 @@ class App extends Component {
     if (!user) return null;
     return (
       <Flex sx={{ height: "100vh", width: "100%" }} flexDirection="column">
-        <Header>
-          <Location>
-            {({ location }) => <NavigationDropdown path={location.pathname} />}
-          </Location>
-          <UserDetails user={user} />
-        </Header>
+        <Header user={user} />
 
         <Flex
-          flexDirection="column"
-          alignItems="center"
+          flexDirection="row"
+          justifyContent="center"
           sx={{ flex: 1, position: "relative", marginTop: "50px" }}
           as="main"
         >

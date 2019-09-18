@@ -1,7 +1,10 @@
 import React from "react";
+import { Location } from "@reach/router";
 import { Flex } from "rebass";
+import NavigationDropdown from "./NavigationDropdown";
+import UserDetails from "../user/UserDetails";
 
-const Header = ({ children }) => {
+const Header = ({ user }) => {
   return (
     <Flex
       sx={{
@@ -16,7 +19,10 @@ const Header = ({ children }) => {
       as="header"
       flexDirection="row"
     >
-      {children}
+      <Location>
+        {({ location }) => <NavigationDropdown path={location.pathname} />}
+      </Location>
+      <UserDetails user={user} />
     </Flex>
   );
 };
