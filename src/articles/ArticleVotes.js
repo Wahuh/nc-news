@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Flex } from "rebass";
+import { Flex, Text } from "rebass";
 import UpIcon from "../common/UpIcon";
 import DownIcon from "../common/DownIcon";
 import VoteButton from "./VoteButton";
@@ -42,7 +42,9 @@ class ArticleVotes extends Component {
         <VoteButton onClick={() => this.handleVote(1)}>
           <UpIcon />
         </VoteButton>
-        {votes + change}
+        <Text color="action" as="p" fontSize={3} fontWeight={600}>
+          {votes + change}
+        </Text>
         <VoteButton onClick={() => this.handleVote(-1)}>
           <DownIcon />
         </VoteButton>
