@@ -83,6 +83,7 @@ class ArticlesList extends Component {
                   path={`${uri}/articles/${article.article_id}/comments`}
                   key={article.article_id}
                   article={article}
+                  onArticleUpdate={this.handleArticleUpdate}
                 />
               ))}
             </Flex>

@@ -31,15 +31,60 @@ class PostCommentForm extends Component {
     const { body } = this.state.comment;
     const { username } = this.props.user;
     return (
-      <Flex onSubmit={this.handleSubmit} as="form" flexDirection="row">
-        <Text>Comment as {username}</Text>
-        <Box
-          onChange={this.handleChange}
-          as="textarea"
-          placeholder="What are your thoughts?"
-          value={body}
-        ></Box>
-        <Button>Post Comment</Button>
+      <Flex
+        mb={7}
+        onSubmit={this.handleSubmit}
+        as="form"
+        flexDirection="column"
+      >
+        <Text mb={2} fontSize={2}>
+          Comment as{" "}
+          <Text fontSize={2} color="link" as="span">
+            {username}
+          </Text>
+        </Text>
+        <Flex
+          sx={{
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: "border",
+            borderTopLeftRadius: "3px",
+            borderTopRightRadius: "3px"
+          }}
+          flexDirection="column"
+        >
+          <Box
+            rows={5}
+            onChange={this.handleChange}
+            as="textarea"
+            placeholder="What are your thoughts?"
+            value={body}
+            fontSize={3}
+            sx={{
+              border: "none",
+              fontFamily: "inherit"
+            }}
+            padding={3}
+          ></Box>
+          <Flex
+            paddingX={3}
+            paddingY={3}
+            justifyContent="flex-end"
+            backgroundColor="form"
+          >
+            <Button
+              letterSpacing="0.025em"
+              paddingX={4}
+              paddingY={2}
+              fontSize={2}
+              fontWeight={600}
+              backgroundColor="action"
+              sx={{ fontFamily: "inherit" }}
+            >
+              POST COMMENT
+            </Button>
+          </Flex>
+        </Flex>
       </Flex>
     );
   }

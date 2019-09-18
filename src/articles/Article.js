@@ -5,6 +5,8 @@ import api from "../api";
 import ArticleVotes from "./ArticleVotes";
 import CommentsList from "../comments/CommentsList";
 import Spinner from "../common/Spinner";
+import PostedBy from "./PostedBy";
+import CommentsCount from "./CommentsCount";
 
 class Article extends Component {
   state = {
@@ -89,7 +91,8 @@ class Article extends Component {
               width: "100%",
               maxWidth: "700px",
               backgroundColor: "white",
-              zIndex: 1
+              zIndex: 1,
+              borderRadius: "4px"
             }}
             as="section"
             flexDirection="row"
@@ -103,9 +106,24 @@ class Article extends Component {
                   article_id={article_id}
                   votes={article.votes}
                 />
-                <Flex flex={1} as="div" flexDirection="column">
-                  <Text as="h1">{article.title}</Text>
-                  <p>{article.body}</p>
+                <Flex
+                  paddingX={5}
+                  paddingRight={10}
+                  paddingY={3}
+                  flex={1}
+                  as="div"
+                  flexDirection="column"
+                >
+                  <PostedBy author={article.author} />
+                  <Text mb={5} as="h1">
+                    {article.title}
+                  </Text>
+                  <Text mb={3} as="p">
+                    {article.body}
+                  </Text>
+                  <Flex mb={6}>
+                    <CommentsCount count={article.comment_count} />
+                  </Flex>
                   <Router>
                     <CommentsList user={user} path="/comments" />
                   </Router>

@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "@reach/router";
 import { Flex, Text, Link as RebassLink } from "rebass";
 import ArticleVotes from "./ArticleVotes";
-import api from "../api";
 import CommentsCount from "./CommentsCount";
+import PostedBy from "./PostedBy";
 
-const ArticleItem = ({ article, onArticleUpdate, path }) => {
+const ArticleItem = ({ article, path }) => {
   const {
     article_id,
     title,
@@ -48,10 +48,7 @@ const ArticleItem = ({ article, onArticleUpdate, path }) => {
           }
         }}
       >
-        <ArticleVotes
-          article_id={article_id}
-          votes={votes}
-        />
+        <ArticleVotes article_id={article_id} votes={votes} />
         <Flex
           paddingX={5}
           paddingY={3}
@@ -60,9 +57,7 @@ const ArticleItem = ({ article, onArticleUpdate, path }) => {
           flexDirection="column"
         >
           <Flex flexDirection="column" mb={6}>
-            <Text color="caption" fontSize={1}>
-              Posted by {author}
-            </Text>
+            <PostedBy author={author} />
             <Text color="header" fontWeight="heading" fontSize={5}>
               {title}
             </Text>
