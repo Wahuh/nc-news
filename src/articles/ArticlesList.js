@@ -57,7 +57,7 @@ class ArticlesList extends Component {
 
   render() {
     const { user, topic } = this.props;
-    const { articles, err, isLoading } = this.state;
+    const { articles, err, isLoading, sortBy } = this.state;
     if (err) return <ErrorPage />;
 
     return (
@@ -71,13 +71,18 @@ class ArticlesList extends Component {
           />
         </Router>
         <Flex flexDirection="column" alignItems="center">
-          <Flex flexDirection="row" justifyContent="flex-end">
-            <SortBy onSort={this.handleSort} />
+          <Flex width="100%" flexDirection="row" justifyContent="flex-end">
+            <SortBy sortBy={sortBy} onSort={this.handleSort} />
           </Flex>
           {isLoading ? (
             <Spinner />
           ) : (
-            <Flex as="ul" sx={{ maxWidth: "650px" }} flexDirection="column">
+            <Flex
+              as="ul"
+              padding={0}
+              sx={{ maxWidth: "650px" }}
+              flexDirection="column"
+            >
               {articles.map(article => (
                 <ArticleItem
                   path={`/t/${article.topic}/articles/${article.article_id}/comments`}
