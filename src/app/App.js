@@ -9,6 +9,7 @@ import Topic from "../topics/Topic";
 import UserDetails from "../user/UserDetails";
 import api from "../api";
 import ErrorPage from "../errors/ErrorPage";
+import Themer from "./Themer";
 
 class App extends Component {
   state = {
@@ -24,22 +25,24 @@ class App extends Component {
     const { user } = this.state;
     if (!user) return null;
     return (
-      <Flex sx={{ height: "100vh", width: "100%" }} flexDirection="column">
-        <Header user={user} />
+      <Themer>
+        <Flex sx={{ height: "100vh", width: "100%" }} flexDirection="column">
+          <Header user={user} />
 
-        <Flex
-          flexDirection="row"
-          justifyContent="center"
-          sx={{ flex: 1, position: "relative", marginTop: "50px" }}
-          as="main"
-        >
-          <Router>
-            <Home path="/" />
-            <Topic user={user} path="/t/:topic/*" />
-            <ErrorPage default />
-          </Router>
+          <Flex
+            flexDirection="row"
+            justifyContent="center"
+            sx={{ flex: 1, position: "relative", marginTop: "50px" }}
+            as="main"
+          >
+            <Router>
+              <Home path="/" />
+              <Topic user={user} path="/t/:topic/*" />
+              <ErrorPage default />
+            </Router>
+          </Flex>
         </Flex>
-      </Flex>
+      </Themer>
     );
   }
 }
