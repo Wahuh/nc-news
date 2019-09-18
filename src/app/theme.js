@@ -14,6 +14,7 @@ export default {
     header: "rgba(0,0,0,.84)",
     body: "rgba(0,0,0,.84)",
     action: "#f10079",
+    actionHover: "#e00070",
     option: "rgba(0,0,0,.84)",
     caption: "rgb(120, 124, 126)",
     icon: "grey",
