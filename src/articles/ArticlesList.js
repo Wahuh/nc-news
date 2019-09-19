@@ -36,6 +36,7 @@ class ArticlesList extends Component {
       const articles = await api.getArticles({ topic, sort_by: sortBy });
       this.setState({ articles, isLoading: false });
     } catch (err) {
+      console.log(err.response.status)
       this.setState({ err, isLoading: false });
     }
   }

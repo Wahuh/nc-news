@@ -1,0 +1,59 @@
+.Modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  transition: all 0.3s;
+}
+
+.ModalOverlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.ModalOverlay::before {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  opacity: 0.8;
+  background-color: black;
+}
+
+.Enter {
+  opacity: 0;
+}
+
+.EnterActive {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.Exit {
+  opacity: 1;
+}
+
+.ExitActive {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.md-effect-3 .md-content {
+  transform: translateY(20%);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.md-show.md-effect-3 .md-content {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
