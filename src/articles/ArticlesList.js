@@ -7,13 +7,15 @@ import api from "../api";
 import Article from "./Article";
 import ErrorPage from "../errors/ErrorPage";
 import Spinner from "../common/Spinner";
-
+import InfiniteScroll from "react-infinite-scroll-component";
 class ArticlesList extends Component {
   state = {
     articles: [],
     sortBy: "created_at",
     err: null,
-    isLoading: true
+    isLoading: true,
+    page: 1,
+    hasMore: true
   };
 
   async componentDidMount() {
@@ -22,10 +24,26 @@ class ArticlesList extends Component {
 
   async componentDidUpdate(prevProps, prevState) {
     const { topic } = this.props;
-    const { sortBy } = this.state;
-    if (prevProps.topic !== topic || prevState.sortBy !== sortBy) {
-      this.setState({ isLoading: true });
-      await this.fetchArticles();
+    const { sortBy, page } = this.state;
+
+    if (prevState.page !== page) {
+      const { topic } = this.props;
+      const { sortBy, page } = this.state;
+      const articles = await api.getArticles({
+        topic,
+        sort_by: sortBy,
+        p: page
+      });
+      this.setState(currentState => ({
+        articles: [...currentState.articles, ...articles],
+        isLoading: false,
+        hasMore: !(articles.length < 10)
+      }));
+    } else {
+      if (prevProps.topic !== topic || prevState.sortBy !== sortBy) {
+        this.setState({ isLoading: true });
+        await this.fetchArticles();
+      }
     }
   }
 
@@ -33,10 +51,16 @@ class ArticlesList extends Component {
     const { topic } = this.props;
     const { sortBy } = this.state;
     try {
-      const articles = await api.getArticles({ topic, sort_by: sortBy });
-      this.setState({ articles, isLoading: false });
+      const articles = await api.getArticles({
+        topic,
+        sort_by: sortBy
+      });
+      this.setState({
+        articles,
+        isLoading: false
+      });
     } catch (err) {
-      console.log(err.response.status)
+      console.log(err);
       this.setState({ err, isLoading: false });
     }
   }
@@ -52,13 +76,21 @@ class ArticlesList extends Component {
     });
   };
 
+  handleInfiniteArticles = async () => {
+    console.log("new page");
+    this.setState(currentState => ({
+      page: currentState.page + 1,
+      isLoading: false
+    }));
+  };
+
   handleSort = sortBy => {
     this.setState({ sortBy });
   };
 
   render() {
     const { user, topic } = this.props;
-    const { articles, err, isLoading, sortBy } = this.state;
+    const { articles, err, isLoading, sortBy, hasMore } = this.state;
     if (err) return <ErrorPage />;
 
     return (
@@ -81,18 +113,26 @@ class ArticlesList extends Component {
             <Flex
               as="ul"
               paddingX={4}
-              mb={7}
               sx={{ maxWidth: "650px" }}
               flexDirection="column"
             >
-              {articles.map(article => (
-                <ArticleItem
-                  path={`/t/${article.topic}/articles/${article.article_id}/comments`}
-                  key={article.article_id}
-                  article={article}
-                  onArticleUpdate={this.handleArticleUpdate}
-                />
-              ))}
+              <InfiniteScroll
+                style={{ paddingBottom: "60px" }}
+                loader={<Spinner />}
+                dataLength={articles.length}
+                next={this.handleInfiniteArticles}
+                hasMore={hasMore}
+                loadMore={this.handleInfiniteArticles}
+              >
+                {articles.map(article => (
+                  <ArticleItem
+                    path={`/t/${article.topic}/articles/${article.article_id}/comments`}
+                    key={article.article_id}
+                    article={article}
+                    onArticleUpdate={this.handleArticleUpdate}
+                  />
+                ))}
+              </InfiniteScroll>
             </Flex>
           )}
         </Flex>
