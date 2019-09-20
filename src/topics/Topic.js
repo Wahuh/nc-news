@@ -5,7 +5,7 @@ import ArticlesList from "../articles/ArticlesList";
 
 const Topic = ({ user, topic }) => {
   return (
-    <Flex flexDirection="column" alignItems="center">
+    <Flex height="100%" flexDirection="column" alignItems="center">
       <Flex
         flexDirection="row"
         alignItems="center"
