@@ -9,6 +9,7 @@ import PostedBy from "./PostedBy";
 import CommentsCount from "./CommentsCount";
 import Modal from "../common/Modal";
 import ErrorPage from "../errors/ErrorPage";
+import { stat } from "fs";
 
 class Article extends Component {
   state = {
@@ -34,10 +35,14 @@ class Article extends Component {
       const article = await api.getArticleById(article_id);
       this.setState({ article, isLoading: false });
     } catch (err) {
+      const { status } = err.response;
       this.setState({
         err: {
-          status: 400,
-          message: "This article does not exist",
+          code: status,
+          message:
+            status === 404
+              ? "We couldn't find the article"
+              : "This article does not exist",
           actionTo: `/t/${topic}`,
           actionLabel: `Back to t/${topic}`
         },

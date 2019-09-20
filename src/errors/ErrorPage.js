@@ -3,8 +3,10 @@ import { Box, Flex, Text } from "rebass";
 import ActionLink from "../common/ActionLink";
 import Error404 from "./Error404";
 import Error500 from "./Error500";
+import Error400 from "./Error400";
 
 const errorComponents = {
+  400: <Error400 />,
   404: <Error404 />,
   500: <Error500 />
 };
