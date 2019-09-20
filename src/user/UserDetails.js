@@ -8,7 +8,7 @@ const UserDetails = ({ user }) => {
       sx={{ marginLeft: "auto" }}
       flexDirection="row"
       alignItems="center"
-      paddingX="1.5rem"
+      paddingX="1rem"
       as="section"
     >
       <Image
@@ -20,7 +20,7 @@ const UserDetails = ({ user }) => {
         }}
         src={avatar_url}
       />
-      <Text color="body" fontWeight={600}>{username}</Text>
+      <Text color="caption" fontWeight={600}>{username}</Text>
     </Flex>
   );
 };
