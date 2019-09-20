@@ -9,7 +9,7 @@ const errorComponents = {
   500: <Error500 />
 };
 
-const ErrorPage = ({ code, message }) => {
+const ErrorPage = ({ code, message, actionTo, actionLabel }) => {
   return (
     <Flex
       flexDirection={{ default: "column", lg: "row" }}
@@ -31,7 +31,9 @@ const ErrorPage = ({ code, message }) => {
           {message || "PAGE NOT FOUND"}
         </Text>
         <Flex mb={{ default: 7, lg: 0 }}>
-          <ActionLink to="/">GO HOME</ActionLink>
+          <ActionLink to={actionTo || "/"}>
+            {actionLabel || "Go Home"}
+          </ActionLink>
         </Flex>
       </Flex>
       {code ? errorComponents[code] : errorComponents[404]}

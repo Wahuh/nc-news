@@ -8,6 +8,7 @@ import Spinner from "../common/Spinner";
 import PostedBy from "./PostedBy";
 import CommentsCount from "./CommentsCount";
 import Modal from "../common/Modal";
+import ErrorPage from "../errors/ErrorPage";
 
 class Article extends Component {
   state = {
@@ -28,12 +29,20 @@ class Article extends Component {
   }
 
   fetchArticle = async () => {
-    const { article_id } = this.props;
+    const { article_id, topic } = this.props;
     try {
       const article = await api.getArticleById(article_id);
       this.setState({ article, isLoading: false });
     } catch (err) {
-      this.setState({ err, isLoading: false });
+      this.setState({
+        err: {
+          status: 400,
+          message: "This article does not exist",
+          actionTo: `/t/${topic}`,
+          actionLabel: `Back to t/${topic}`
+        },
+        isLoading: false
+      });
     }
   };
 
@@ -48,7 +57,6 @@ class Article extends Component {
   render() {
     const { article, err, isLoading } = this.state;
     const { user, article_id, onArticleUpdate } = this.props;
-    if (err) return <div>Invalid article</div>;
     // const {
     //   body,
     //   author,
@@ -63,6 +71,7 @@ class Article extends Component {
       <Modal onClose={this.goBackToArticles}>
         <Flex
           flexDirection="row"
+          justifyContent="center"
           mt={{ sm: 0, md: 9 }}
           mb={{ sm: 0, md: 9 }}
           width="100%"
@@ -75,6 +84,15 @@ class Article extends Component {
         >
           {isLoading ? (
             <Spinner />
+          ) : err ? (
+            <Flex height="calc(100vh - 50px)">
+              <ErrorPage
+                code={err.code}
+                message={err.message}
+                actionTo={err.actionTo}
+                actionLabel={err.actionLabel}
+              />
+            </Flex>
           ) : (
             <>
               <ArticleVotes
