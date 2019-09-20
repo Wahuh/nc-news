@@ -22,9 +22,11 @@ class PostCommentForm extends Component {
       onPostComment
     } = this.props;
     const { body } = this.state.comment;
-    const comment = await api.postComment({ article_id, username, body });
-    onPostComment(comment);
-    this.setState({ comment: { body: "" } });
+    if (body) {
+      const comment = await api.postComment({ article_id, username, body });
+      onPostComment(comment);
+      this.setState({ comment: { body: "" } });
+    }
   };
 
   render() {
@@ -83,6 +85,14 @@ class PostCommentForm extends Component {
               fontWeight={600}
               backgroundColor="action"
               type="submit"
+              sx={{
+                transition: "background-color 200ms ease-out",
+                "&:disabled": {
+                  backgroundColor: "rgba(0, 0, 0, 0.12)",
+                  color: "rgba(0, 0, 0, 0.26)"
+                }
+              }}
+              disabled={body ? false : true}
               onClick={e => e.stopPropagation()}
             >
               POST COMMENT
