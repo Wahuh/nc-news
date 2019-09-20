@@ -34,7 +34,7 @@ const ErrorPage = ({ code, message }) => {
           <ActionLink to="/">GO HOME</ActionLink>
         </Flex>
       </Flex>
-      {code ? errorComponents[code] : errorComponents[500]}
+      {code ? errorComponents[code] : errorComponents[404]}
     </Flex>
   );
 };

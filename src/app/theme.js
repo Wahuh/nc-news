@@ -7,6 +7,7 @@ breakpoints.xl = breakpoints[4];
 
 export default {
   breakpoints,
+  radii: [0, "4px"],
   colors: {
     fg: "white",
     bg: "#f2f2f2",

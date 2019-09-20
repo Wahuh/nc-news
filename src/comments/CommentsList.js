@@ -1,23 +1,31 @@
 import React, { Component } from "react";
-import { Flex } from "rebass";
+import { Box, Flex } from "rebass";
 import api from "../api";
 import PostCommentForm from "./PostCommentForm";
 import CommentItem from "./CommentItem";
+import ErrorPage from "../errors/ErrorPage";
+import Spinner from "../common/Spinner";
 
 class CommentsList extends Component {
   state = {
-    comments: []
+    comments: [],
+    isLoading: true,
+    err: null
   };
 
   async componentDidMount() {
     const { article_id } = this.props;
-    const comments = await api.getCommentsByArticleId(article_id);
-    this.setState({ comments });
+    try {
+      const comments = await api.getCommentsByArticleId(article_id);
+      this.setState({ comments, isLoading: false });
+    } catch (err) {
+      this.setState({ err, isLoading: false });
+    }
   }
 
   handlePostComment = comment => {
     this.setState(currentState => ({
-      comments: [...currentState.comments, comment]
+      comments: [comment, ...currentState.comments]
     }));
   };
 
@@ -35,27 +43,39 @@ class CommentsList extends Component {
   };
 
   render() {
-    const { comments } = this.state;
+    const { comments, err, isLoading } = this.state;
     const { user, article_id } = this.props;
     const { username } = user;
+    if (err) return <ErrorPage />;
     return (
-      <div>
-        <PostCommentForm
-          article_id={article_id}
-          user={user}
-          onPostComment={this.handlePostComment}
-        />
-        <Flex flexDirection="column">
-          {comments.map(comment => (
-            <CommentItem
-              key={comment.comment_id}
-              onDelete={this.handleDeleteComment}
-              canBeDeleted={username === comment.author}
-              comment={comment}
+      <Flex
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ minHeight: "340px" }}
+      >
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <PostCommentForm
+              article_id={article_id}
+              user={user}
+              onPostComment={this.handlePostComment}
             />
-          ))}
-        </Flex>
-      </div>
+            <Flex flexDirection="column">
+              {comments.map(comment => (
+                <CommentItem
+                  key={comment.comment_id}
+                  onDelete={this.handleDeleteComment}
+                  canBeDeleted={username === comment.author}
+                  comment={comment}
+                />
+              ))}
+            </Flex>
+          </>
+        )}
+      </Flex>
     );
   }
 }

@@ -1,0 +1,21 @@
+.Logo {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.Dot1 {
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  margin-right: "10px";
+}
+
+.Dot2 {
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  border-radius: 50%;
+}

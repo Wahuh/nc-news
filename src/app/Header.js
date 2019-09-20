@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex } from "rebass";
 import UserDetails from "../user/UserDetails";
+import Logo from "./Logo";
 
 const Header = ({ user }) => {
   return (
@@ -17,6 +18,7 @@ const Header = ({ user }) => {
       as="header"
       flexDirection="row"
     >
+      <Logo />
       <UserDetails user={user} />
     </Flex>
   );

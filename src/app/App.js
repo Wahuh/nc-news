@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { Location, Router } from "@reach/router";
+import { Router } from "@reach/router";
 import { Flex } from "rebass";
 import "./App.css";
 import Header from "./Header";
 import Home from "../home/Home";
-import NavigationDropdown from "./NavigationDropdown";
 import Topic from "../topics/Topic";
-import UserDetails from "../user/UserDetails";
 import api from "../api";
 import ErrorPage from "../errors/ErrorPage";
 import Themer from "./Themer";

@@ -7,6 +7,7 @@ import CommentsList from "../comments/CommentsList";
 import Spinner from "../common/Spinner";
 import PostedBy from "./PostedBy";
 import CommentsCount from "./CommentsCount";
+import Modal from "../common/Modal";
 
 class Article extends Component {
   state = {
@@ -59,80 +60,54 @@ class Article extends Component {
     // } = article;
 
     return (
-      <Flex
-        sx={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          left: 0,
-          zIndex: 1
-        }}
-      >
+      <Modal onClose={this.goBackToArticles}>
         <Flex
-          onClick={this.goBackToArticles}
-          flexDirection="column"
-          alignItems="center"
+          flexDirection="row"
+          mt={{ sm: 0, md: 9 }}
+          mb={{ sm: 0, md: 9 }}
+          width="100%"
+          backgroundColor="fg"
           sx={{
-            height: "100%",
-            width: "100%",
-            position: "relative",
-            "&::before": {
-              width: "100%",
-              height: "100%",
-              content: "''",
-              position: "absolute",
-              opacity: 0.8,
-              backgroundColor: "black"
-            }
+            maxWidth: "700px",
+            zIndex: 1,
+            borderRadius: { sm: 0, md: 1 }
           }}
         >
-          <Flex
-            sx={{
-              width: "100%",
-              maxWidth: "700px",
-              backgroundColor: "white",
-              zIndex: 1,
-              borderRadius: "4px"
-            }}
-            as="section"
-            flexDirection="row"
-          >
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <>
-                <ArticleVotes
-                  onArticleUpdate={onArticleUpdate}
-                  article_id={article_id}
-                  votes={article.votes}
-                />
-                <Flex
-                  paddingX={5}
-                  paddingRight={10}
-                  paddingY={3}
-                  flex={1}
-                  as="div"
-                  flexDirection="column"
-                >
-                  <PostedBy author={article.author} />
-                  <Text mb={5} as="h1">
-                    {article.title}
-                  </Text>
-                  <Text color="body" mb={5} as="p">
-                    {article.body}
-                  </Text>
-                  <Flex mb={6}>
-                    <CommentsCount count={article.comment_count} />
-                  </Flex>
-                  <Router>
-                    <CommentsList user={user} path="/comments" />
-                  </Router>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <ArticleVotes
+                onArticleUpdate={onArticleUpdate}
+                article_id={article_id}
+                votes={article.votes}
+              />
+              <Flex
+                paddingX={{ md: 8 }}
+                paddingRight={{ default: 6, md: 10 }}
+                paddingY={3}
+                flex={1}
+                as="div"
+                flexDirection="column"
+              >
+                <PostedBy date={article.created_at} author={article.author} />
+                <Text mb={5} as="h1">
+                  {article.title}
+                </Text>
+                <Text color="body" mb={5} as="p">
+                  {article.body}
+                </Text>
+                <Flex mb={6}>
+                  <CommentsCount count={article.comment_count} />
                 </Flex>
-              </>
-            )}
-          </Flex>
+                <Router>
+                  <CommentsList user={user} path="/comments" />
+                </Router>
+              </Flex>
+            </>
+          )}
         </Flex>
-      </Flex>
+      </Modal>
     );
   }
 }

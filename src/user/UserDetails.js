@@ -16,11 +16,11 @@ const UserDetails = ({ user }) => {
           width: "30px",
           height: "30px",
           borderRadius: "2rem",
-          marginRight: "0.5rem",
+          marginRight: "0.5rem"
         }}
         src={avatar_url}
       />
-      <Text>{username}</Text>
+      <Text color="body" fontWeight={600}>{username}</Text>
     </Flex>
   );
 };

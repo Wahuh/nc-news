@@ -11,13 +11,13 @@ const VoteButton = ({ onClick, children }) => {
         justifyContent: "center",
         alignItems: "center",
         svg: {
-          height: "20px",
-          width: "20px",
-          fill: "black"
+          height: "32px",
+          width: "32px",
+          fill: "icon"
         }
       }}
-      paddingX={4}
-      paddingY={3}
+      paddingX={3}
+      paddingY={0}
       onClick={onClick}
     >
       {children}
