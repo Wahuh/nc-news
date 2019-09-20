@@ -60,7 +60,6 @@ class ArticlesList extends Component {
         isLoading: false
       });
     } catch (err) {
-      console.log(err);
       this.setState({ err, isLoading: false });
     }
   }
@@ -77,7 +76,6 @@ class ArticlesList extends Component {
   };
 
   handleInfiniteArticles = async () => {
-    console.log("new page");
     this.setState(currentState => ({
       page: currentState.page + 1,
       isLoading: false
@@ -122,7 +120,6 @@ class ArticlesList extends Component {
                 dataLength={articles.length}
                 next={this.handleInfiniteArticles}
                 hasMore={hasMore}
-                loadMore={this.handleInfiniteArticles}
               >
                 {articles.map(article => (
                   <ArticleItem
