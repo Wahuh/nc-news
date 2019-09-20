@@ -101,9 +101,9 @@ class ArticlesList extends Component {
             path="/articles/:article_id/*"
           />
         </Router>
-        <Flex flexDirection="column" alignItems="center">
+        <Flex id="notab" flexDirection="column" alignItems="center">
           <Flex width="100%" flexDirection="row" justifyContent="flex-end">
-            <SortBy sortBy={sortBy} onSort={this.handleSort} />
+            <SortBy path="/*" sortBy={sortBy} onSort={this.handleSort} />
           </Flex>
           {isLoading ? (
             <Spinner />
