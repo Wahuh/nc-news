@@ -1,5 +1,4 @@
 import axios from "axios";
-import { async } from "q";
 
 const instance = axios.create({
   baseURL: "https://speedwagon-server.herokuapp.com/api"
@@ -30,10 +29,14 @@ const deleteCommentById = async comment_id => {
   await instance.delete(`/comments/${comment_id}`);
 };
 
-const getCommentsByArticleId = async article_id => {
+const getCommentsByArticleId = async (article_id, query) => {
   const {
     data: { comments }
-  } = await instance.get(`/articles/${article_id}/comments`);
+  } = await instance.get(`/articles/${article_id}/comments`, {
+    params: {
+      ...query
+    }
+  });
   return comments;
 };
 

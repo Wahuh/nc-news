@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Box, Flex } from "rebass";
+import { Flex, Button } from "rebass";
 import api from "../api";
 import PostCommentForm from "./PostCommentForm";
 import CommentItem from "./CommentItem";
@@ -10,18 +10,56 @@ class CommentsList extends Component {
   state = {
     comments: [],
     isLoading: true,
-    err: null
+    err: null,
+    hasMore: true,
+    page: 1,
+    areMoreCommentsLoading: false
   };
 
   async componentDidMount() {
     const { article_id } = this.props;
     try {
-      const comments = await api.getCommentsByArticleId(article_id);
+      const comments = await this.fetchComments(article_id);
       this.setState({ comments, isLoading: false });
     } catch (err) {
       this.setState({ err, isLoading: false });
     }
   }
+
+  async componentDidUpdate(prevProps, prevState) {
+    const { article_id } = this.props;
+    const { page, hasMore } = this.state;
+    if (page !== prevState.page) {
+      if (hasMore) {
+        const comments = await this.fetchComments(article_id);
+        if (comments.length < 10) {
+          this.setState(currentState => ({
+            comments: [...currentState.comments, ...comments],
+            hasMore: false,
+            areMoreCommentsLoading: false
+          }));
+        } else {
+          this.setState(currentState => ({
+            comments: [...currentState.comments, ...comments],
+            areMoreCommentsLoading: false
+          }));
+        }
+      }
+    }
+  }
+
+  async fetchComments(article_id) {
+    const { page } = this.state;
+    const comments = await api.getCommentsByArticleId(article_id, { p: page });
+    return comments;
+  }
+
+  handleInfiniteComments = () => {
+    this.setState(currentState => ({
+      areMoreCommentsLoading: true,
+      page: currentState.page + 1
+    }));
+  };
 
   handlePostComment = comment => {
     this.setState(currentState => ({
@@ -43,7 +81,14 @@ class CommentsList extends Component {
   };
 
   render() {
-    const { comments, err, isLoading } = this.state;
+    const {
+      comments,
+      err,
+      isLoading,
+      hasMore,
+      areMoreCommentsLoading
+    } = this.state;
+    console.log(areMoreCommentsLoading);
     const { user, article_id } = this.props;
     const { username } = user;
     if (err) return <ErrorPage />;
@@ -72,6 +117,12 @@ class CommentsList extends Component {
                   comment={comment}
                 />
               ))}
+              {areMoreCommentsLoading && <Spinner />}
+              {hasMore && (
+                <Button mt={5} onClick={this.handleInfiniteComments}>
+                  Load more
+                </Button>
+              )}
             </Flex>
           </>
         )}
