@@ -9,7 +9,6 @@ import PostedBy from "./PostedBy";
 import CommentsCount from "./CommentsCount";
 import Modal from "../common/Modal";
 import ErrorPage from "../errors/ErrorPage";
-import { stat } from "fs";
 
 class Article extends Component {
   state = {
@@ -18,12 +17,36 @@ class Article extends Component {
     err: null
   };
 
+  enableTabbing() {
+    const noTab = document.getElementById("notab");
+    const tabbables = noTab.querySelectorAll("a, button, input");
+    tabbables.forEach(tabbable => {
+      tabbable.removeAttribute("tabIndex");
+    });
+  }
+
+  disableTabbing() {
+    const noTab = document.getElementById("notab");
+    const tabbables = noTab.querySelectorAll("a, button, input");
+    tabbables.forEach(tabbable => {
+      tabbable.setAttribute("tabIndex", -1);
+    });
+  }
+
   async componentDidMount() {
+    this.disableTabbing ();
     await this.fetchArticle();
   }
 
+  componentWillUnmount() {
+    this.enableTabbing();
+  }
+
   async componentDidUpdate(prevProps) {
-    const { article_id } = this.props;
+    const { article_id, articlesLength } = this.props;
+    if (prevProps.articlesLength !== articlesLength) {
+      this.disableTabbing();
+    }
     if (prevProps.article_id !== article_id) {
       await this.fetchArticle();
     }
