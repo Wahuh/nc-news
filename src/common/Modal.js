@@ -7,7 +7,12 @@ const Modal = ({ children, onClose }) => {
     <Flex
       width="100%"
       height="100%"
-      sx={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
+      sx={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 1
+      }}
     >
       <div onClick={onClose} className={styles.ModalOverlay}>
         {children}
