@@ -5,7 +5,7 @@ A social news aggregation, web content rating and discussion site inspired by Re
 - **Live demo**: https://topical-news.netlify.com/
 - **Github repo**: https://github.com/Wahuh/topical-news
 - **Api url**: https://speedwagon-server.herokuapp.com/api
-- **Api Github repo**: https://github.com/Wahuh/be-nc-news
+- **Api Github repo**: https://github.com/Wahuh/topical-news-api
 
 > Note that you will be "logged in" as a specific user by default and any comments you make will have that user's username
 
