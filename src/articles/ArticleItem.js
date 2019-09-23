@@ -19,9 +19,9 @@ const ArticleItem = ({ article, path }) => {
     <Flex
       flex={1}
       backgroundColor="fg"
-      sx={{ border: "1px solid rgb(204,204,204)", borderRadius: "4px" }}
+      sx={{ borderBottom: "1px solid rgb(204,204,204)" }}
       as="li"
-      mb={4}
+      // mb={{ default: 0, }}
     >
       <RebassLink
         onClick={e => {
@@ -39,7 +39,8 @@ const ArticleItem = ({ article, path }) => {
           flex: 1,
           textDecoration: "none",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: { default: "column", lg: "row" },
+
           "&:focus": {
             color: "green"
           },
@@ -50,7 +51,7 @@ const ArticleItem = ({ article, path }) => {
       >
         <ArticleVotes article_id={article_id} votes={votes} />
         <Flex
-          paddingX={5}
+          paddingRight={3}
           paddingY={3}
           flex={1}
           justifyContent="space-between"

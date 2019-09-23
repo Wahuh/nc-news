@@ -102,16 +102,15 @@ class ArticlesList extends Component {
           />
         </Router>
         <Flex id="notab" flexDirection="column" alignItems="center">
-          <Flex width="100%" flexDirection="row" justifyContent="flex-end">
-            <SortBy path="/*" sortBy={sortBy} onSort={this.handleSort} />
-          </Flex>
+          <SortBy path="/*" sortBy={sortBy} onSort={this.handleSort} />
           {isLoading ? (
             <Spinner />
           ) : (
             <Flex
               as="ul"
-              paddingX={4}
-              sx={{ maxWidth: "650px" }}
+              paddingX={0}
+              width={{ default: "100vw", md: "70vw", lg: "60vw", xl: "40vw" }}
+              // sx={{ maxWidth: "60vw" }}
               flexDirection="column"
             >
               <InfiniteScroll

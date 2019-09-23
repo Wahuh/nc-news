@@ -1,7 +1,11 @@
 import React from "react";
+import ClockIcon from "../common/ClockIcon";
+import HotIcon from "../common/HotIcon";
+import PopularIcon from "../common/PopularIcon";
 import Select from "react-select";
 import styles from "./SortBy.module.css";
-import { Flex, Text, Box } from "rebass";
+import { Flex, Text, Button } from "rebass";
+import SortByButton from "./SortByButton";
 
 const options = [
   { value: "created_at", label: "New" },
@@ -16,24 +20,39 @@ const SortBy = ({ onSort, sortBy }) => {
 
   return (
     <Flex
-      mb={3}
-      paddingY={3}
+      width="100vw"
+      maxWidth={{ sm: "400px" }}
       flexDirection="row"
-      alignItems="center"
+      sx={{
+        borderTopColor: "border",
+        borderTopWidth: "1px",
+        borderTopStyle: "solid"
+      }}
+      mb={1}
     >
-      <Text mr={4} fontWeight={600} fontSize={2} color="body">
-        SORT
-      </Text>
+      <SortByButton
+        isActive={sortBy === "created_at"}
+        onClick={() => onSort("created_at")}
+        text="New"
+      >
+        <ClockIcon />
+      </SortByButton>
 
-      <Select
-        // as={Select}
-        className={styles.SortBy}
-        value={options.find(({ value }) => value === sortBy)}
-        options={options}
-        padding="0.5rem"
-        sx={{ border: "none", backgroundColor: "transparent" }}
-        onChange={handleChange}
-      />
+      <SortByButton
+        isActive={sortBy === "comment_count"}
+        onClick={() => onSort("comment_count")}
+        text="Hot"
+      >
+        <HotIcon />
+      </SortByButton>
+
+      <SortByButton
+        isActive={sortBy === "votes"}
+        onClick={() => onSort("votes")}
+        text="Popular"
+      >
+        <PopularIcon />
+      </SortByButton>
     </Flex>
   );
 };
