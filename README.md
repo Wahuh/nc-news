@@ -22,3 +22,16 @@ A social news aggregation, web content rating and discussion site inspired by Re
 2. `cd topical-news`
 3. `npm install`
 4. `npm start`
+
+### Tech Stack
+
+* Javascript
+* CSS
+* HTML
+
+#### Dependencies
+* react
+* @reach/router
+* rebass
+* react-kawaii
+* axios
