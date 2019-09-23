@@ -76,7 +76,6 @@ class CommentsList extends Component {
         )
       }));
     } catch (err) {
-      console.log("oh dear", err);
     }
   };
 
@@ -88,7 +87,6 @@ class CommentsList extends Component {
       hasMore,
       areMoreCommentsLoading
     } = this.state;
-    console.log(areMoreCommentsLoading);
     const { user, article_id } = this.props;
     const { username } = user;
     if (err) return <ErrorPage />;
