@@ -15,12 +15,14 @@ class CommentVotes extends Component {
   handleVote = async voteDiff => {
     const { comment_id } = this.props;
     this.setState(currentState => ({ change: currentState.change + voteDiff }));
-    await api.patchComment({ comment_id, inc_votes: voteDiff }).catch(err => {
+    try {
+      await api.patchComment({ comment_id, inc_votes: voteDiff });
+    } catch (err) {
       this.setState(currentState => ({
         err,
         change: currentState.change - voteDiff
       }));
-    });
+    }
   };
 
   clearError = () => {
