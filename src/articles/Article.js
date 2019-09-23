@@ -34,7 +34,7 @@ class Article extends Component {
   }
 
   async componentDidMount() {
-    this.disableTabbing ();
+    this.disableTabbing();
     await this.fetchArticle();
   }
 
