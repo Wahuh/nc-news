@@ -8,6 +8,7 @@ import Topic from "../topics/Topic";
 import api from "../api";
 import ErrorPage from "../errors/ErrorPage";
 import Themer from "./Themer";
+import UserAccount from "../user/UserAccount";
 
 class App extends Component {
   state = {
@@ -36,6 +37,7 @@ class App extends Component {
             <Router>
               <Home path="/" />
               <Topic user={user} path="/t/:topic/*" />
+              <UserAccount user={user} path="/me" />
               <ErrorPage default />
             </Router>
           </Flex>

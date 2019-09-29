@@ -26,8 +26,8 @@ const Logo = () => {
         <div className={styles.Dot1}></div>
         <div className={styles.Dot2}></div>
       </Flex>
-      <Text color="body" fontWeight={600} fontSize={4}>
-        topical
+      <Text color="heading" fontWeight={600} fontSize={4}>
+        Home
       </Text>
     </RebassLink>
   );

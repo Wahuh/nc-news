@@ -12,6 +12,13 @@ const SortByButton = ({ text, children, onClick, isActive }) => {
         justifyContent: "center",
         alignItems: "center",
         paddingY: 3,
+        cursor: "pointer",
+        "&:hover": {
+          div: {
+            color: isActive ? "action" : "heading"
+          }
+        },
+        transition: "color 200ms ease-out",
         svg: {
           fill: isActive ? "action" : "icon",
           size: "1.25rem",

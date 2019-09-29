@@ -6,7 +6,7 @@ const PostedBy = ({ author, date }) => {
   return (
     <Text color="caption" fontSize={1}>
       Posted by{" "}
-      <Text as="span" fontSize={1} color="link">
+      <Text as="span" fontSize={1} color="heading">
         {author}
       </Text>{" "}
       <DateTimeAgo date={date} />

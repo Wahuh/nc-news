@@ -75,8 +75,7 @@ class CommentsList extends Component {
           comment => comment.comment_id !== comment_id
         )
       }));
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   render() {
@@ -117,8 +116,18 @@ class CommentsList extends Component {
               ))}
               {areMoreCommentsLoading && <Spinner />}
               {hasMore && (
-                <Button mt={5} onClick={this.handleInfiniteComments}>
-                  Load more
+                <Button
+                  letterSpacing="0.025em"
+                  backgroundColor="#4183c4"
+                  mt={5}
+                  paddingX={4}
+                  paddingY={3}
+                  fontSize={2}
+                  fontWeight={600}
+                  color="heading"
+                  onClick={this.handleInfiniteComments}
+                >
+                  LOAD MORE
                 </Button>
               )}
             </Flex>

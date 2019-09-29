@@ -1,7 +1,7 @@
 .Dot1 {
   width: 25px;
-  height: 25px;
   background-color: #f10079;
+  height: 25px;
   border-radius: 50%;
   position: absolute;
   opacity: 0.7;
@@ -10,8 +10,8 @@
 .Dot2 {
   width: 25px;
   height: 25px;
-  background-color: #333;
   border-radius: 50%;
+  background-color: black;
   position: absolute;
   margin-left: 15px;
   opacity: 0.7;

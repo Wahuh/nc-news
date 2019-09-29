@@ -23,7 +23,7 @@ const UserDetails = ({ user }) => {
         alt={`${username}'s profile image`}
         src={avatar_url}
       />
-      <Text color="caption" fontWeight={600}>
+      <Text color="#bdcadb" fontWeight={600}>
         {username}
       </Text>
     </Flex>

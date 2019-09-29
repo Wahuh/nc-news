@@ -8,11 +8,13 @@ const TopicItem = ({ topic }) => {
     <Flex
       paddingX={4}
       paddingY={1}
+      backgroundColor="#4183c4"
       sx={{
-        borderRadius: "3rem",
-        borderColor: "link",
-        borderWidth: "2px",
-        borderStyle: "solid"
+        borderRadius: "3px",
+        "&:hover": {
+          backgroundColor: "#3672ad"
+        },
+        transition: "background-color 200ms ease-out"
       }}
       mr={5}
       as="li"
@@ -20,7 +22,7 @@ const TopicItem = ({ topic }) => {
     >
       <RebassLink
         as={Link}
-        color="link"
+        color="heading"
         sx={{ textDecoration: "none" }}
         to={`/t/${slug}`}
         fontWeight={600}

@@ -11,8 +11,8 @@ const Header = ({ user }) => {
         top: 0,
         width: "100%",
         height: "50px",
-        backgroundColor: "white",
-        borderBottom: "1px solid rgb(237,239,241)",
+        backgroundColor: "header",
+        borderBottom: "0.1rem solid #484f6c",
         zIndex: 2
       }}
       as="header"

@@ -40,9 +40,9 @@ class PostCommentForm extends Component {
         flexDirection="column"
         onSubmit={this.handleSubmit}
       >
-        <Text as="label" htmlFor="comment" mb={2} fontSize={2}>
+        <Text color="caption" as="label" htmlFor="comment" mb={2} fontSize={2}>
           Comment as{" "}
-          <Text fontSize={2} color="link" as="span">
+          <Text fontSize={2} color="heading" as="span">
             {username}
           </Text>
         </Text>
@@ -50,13 +50,16 @@ class PostCommentForm extends Component {
           sx={{
             borderWidth: "1px",
             borderStyle: "solid",
-            borderColor: "border",
+            borderColor: "#565e80",
             borderTopLeftRadius: "3px",
-            borderTopRightRadius: "3px"
+            borderTopRightRadius: "3px",
+            zIndex: 1
           }}
           flexDirection="column"
         >
           <Box
+            backgroundColor="header"
+            color="body"
             id="comment"
             name="comment"
             rows={5}
@@ -75,7 +78,7 @@ class PostCommentForm extends Component {
             paddingX={3}
             paddingY={3}
             justifyContent="flex-end"
-            backgroundColor="form"
+            backgroundColor="#565e80"
           >
             <Button
               letterSpacing="0.025em"
@@ -83,13 +86,16 @@ class PostCommentForm extends Component {
               paddingY={2}
               fontSize={2}
               fontWeight={600}
-              backgroundColor="action"
+              backgroundColor="#4183c4"
               type="submit"
               sx={{
                 transition: "background-color 200ms ease-out",
                 "&:disabled": {
                   backgroundColor: "rgba(0, 0, 0, 0.12)",
                   color: "rgba(0, 0, 0, 0.26)"
+                },
+                "&:hover": {
+                  backgroundColor: "#3672ad"
                 }
               }}
               disabled={body ? false : true}

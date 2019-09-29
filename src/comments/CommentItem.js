@@ -13,6 +13,7 @@ const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
 
   return (
     <Flex
+      backgroundColor="fgHover"
       sx={{
         boxShadow: "0 1px 4px rgba(0,0,0,.04)",
         border: "1px solid rgba(0,0,0,.09)",
@@ -20,12 +21,12 @@ const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
       }}
       paddingY={3}
       paddingX={5}
-      mb={5}
+      mb={2}
       as="li"
       flexDirection="column"
     >
       <Flex mb={3} flexDirection="column">
-        <Text color="link" as="p" mb={1} fontSize={2}>
+        <Text color="heading" fontWeight={600} as="p" mb={1} fontSize={2}>
           {author}
         </Text>
         <DateTimeAgo date={created_at} />
@@ -43,7 +44,7 @@ const CommentItem = ({ comment, canBeDeleted, onDelete }) => {
               paddingY={2}
               fontSize={1}
               backgroundColor="transparent"
-              color="action"
+              color="#ff6347"
               fontWeight={600}
               letterSpacing={1}
               onClick={e => e.stopPropagation()}

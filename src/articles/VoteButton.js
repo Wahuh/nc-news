@@ -11,10 +11,17 @@ const VoteButton = ({ onClick, children, ariaLabel }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        cursor: "pointer",
+        "&:hover": {
+          svg: {
+            fill: "white"
+          }
+        },
         svg: {
           height: "32px",
           width: "32px",
-          fill: "icon"
+          fill: "icon",
+          transition: "fill 150ms ease-out"
         }
       }}
       paddingX={3}

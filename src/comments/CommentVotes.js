@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Flex } from "rebass";
+import { Flex, Text } from "rebass";
 import api from "../api";
 import VoteButton from "../articles/VoteButton";
 import UpIcon from "../common/UpIcon";
@@ -37,7 +37,7 @@ class CommentVotes extends Component {
         <VoteButton onClick={() => this.handleVote(1)}>
           <UpIcon />
         </VoteButton>
-        {votes + change}
+        <Text color="action">{votes + change}</Text>
         <VoteButton onClick={() => this.handleVote(-1)}>
           <DownIcon />
         </VoteButton>

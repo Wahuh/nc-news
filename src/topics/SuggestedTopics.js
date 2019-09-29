@@ -14,19 +14,27 @@ class SuggestedTopics extends Component {
   render() {
     const { topics } = this.state;
     return (
-      <Flex
-        sx={{ position: "relative" }}
-        width="100%"
-        justifyContent="center"
-        alignItems="center"
-        paddingY={4}
-      >
-        {/* <Text sx={{ position: "absolute", left: "50%" }} color="body" mr={5}>
-          Suggested topics:
-        </Text> */}
-        {topics.map(topic => (
-          <TopicItem topic={topic} key={topic.slug} />
-        ))}
+      <Flex justifyContent="center" alignItems="center" flexDirection="column">
+        <Text
+          padding={4}
+          fontWeight={600}
+          as="p"
+          letterSpacing="0.025em"
+          color="body"
+          mr={5}
+        >
+          SUGGESTED TOPICS
+        </Text>
+        <Flex
+          width="100%"
+          justifyContent="center"
+          alignItems="center"
+          mb={4}
+        >
+          {topics.map(topic => (
+            <TopicItem topic={topic} key={topic.slug} />
+          ))}
+        </Flex>
       </Flex>
     );
   }

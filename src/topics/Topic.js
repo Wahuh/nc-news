@@ -10,10 +10,9 @@ const Topic = ({ user, topic }) => {
         flexDirection="row"
         justifyContent="center"
         alignItems="center"
-        paddingX={6}
         sx={{ width: "100%", height: "50px" }}
       >
-        <Text color="body" fontWeight={600} fontSize={5}>{`t/${topic}`}</Text>
+        <Text color="body" fontWeight={600} fontSize={6}>{`t/${topic}`}</Text>
       </Flex>
       <Router>
         <ArticlesList path="/*" user={user} topic={topic} />

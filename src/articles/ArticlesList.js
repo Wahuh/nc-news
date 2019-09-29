@@ -109,7 +109,7 @@ class ArticlesList extends Component {
             <Flex
               as="ul"
               paddingX={0}
-              width={{ default: "100vw", md: "70vw", lg: "60vw", xl: "40vw" }}
+              width={{ default: "100vw", md: "70vw", lg: "60vw", xl: "50vw" }}
               // sx={{ maxWidth: "60vw" }}
               flexDirection="column"
             >

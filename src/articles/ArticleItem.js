@@ -18,10 +18,13 @@ const ArticleItem = ({ article, path }) => {
   return (
     <Flex
       flex={1}
-      backgroundColor="fg"
-      sx={{ borderBottom: "1px solid rgb(204,204,204)" }}
+      sx={
+        {
+          // borderBottom: "1px solid rgb(204,204,204)"
+        }
+      }
       as="li"
-      // mb={{ default: 0, }}
+      mb={2}
     >
       <RebassLink
         onClick={e => {
@@ -34,14 +37,19 @@ const ArticleItem = ({ article, path }) => {
           }
         }}
         as={Link}
+        backgroundColor="fg"
         to={path}
         sx={{
           flex: 1,
           textDecoration: "none",
           display: "flex",
+          transition: "background-color 150ms ease-out",
           flexDirection: { default: "column", lg: "row" },
-
+          "&:hover": {
+            backgroundColor: "fgHover"
+          },
           "&:focus": {
+            backgroundColor: "fgHover",
             color: "green"
           },
           "&:active": {
@@ -59,7 +67,7 @@ const ArticleItem = ({ article, path }) => {
         >
           <Flex flexDirection="column" mb={6}>
             <PostedBy author={author} date={created_at} />
-            <Text color="header" fontWeight="heading" fontSize={5}>
+            <Text color="heading" fontWeight="heading" fontSize={5}>
               {title}
             </Text>
           </Flex>

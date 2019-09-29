@@ -8,8 +8,13 @@
 body {
   margin: 0;
   font-family: "Source Sans Pro", sans-serif;
-  background-color: #f2f2f2;
+  background-color: rgb(17, 20, 34);
   line-height: 1.4;
+  overflow-y: scroll;
+}
+
+button {
+  cursor: pointer;
 }
 
 div[role="group"][tabindex] {

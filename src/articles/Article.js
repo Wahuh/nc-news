@@ -100,12 +100,13 @@ class Article extends Component {
         <Flex
           flexDirection="row"
           justifyContent="center"
+          pt={3}
           mt={{ sm: 0, md: 9 }}
           mb={{ sm: 0, md: 9 }}
           width="100%"
+          maxWidth={{ default: "700px", xl: "800px" }}
           backgroundColor="fg"
           sx={{
-            maxWidth: "700px",
             zIndex: 1,
             borderRadius: { sm: 0, md: 1 }
           }}
@@ -137,7 +138,7 @@ class Article extends Component {
                 flexDirection="column"
               >
                 <PostedBy date={article.created_at} author={article.author} />
-                <Text mb={5} as="h1">
+                <Text color="heading" mb={5} as="h1">
                   {article.title}
                 </Text>
                 <Text color="body" mb={5} as="p">
