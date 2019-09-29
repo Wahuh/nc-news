@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "rebass";
 
-const VoteButton = ({ onClick, children }) => {
+const VoteButton = ({ onClick, children, ariaLabel }) => {
   return (
     <Button
+      aria-label={ariaLabel}
       sx={{
         border: "none",
         backgroundColor: "transparent",
