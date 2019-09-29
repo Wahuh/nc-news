@@ -11,7 +11,7 @@ const CommentsCount = ({ count }) => {
       }}
     >
       <CommentIcon />
-      <Text color="option" fontWeight="option" fontSize={2}>
+      <Text color="caption" fontWeight="option" fontSize={2}>
         {count} comments
       </Text>
     </Flex>
