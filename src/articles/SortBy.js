@@ -2,34 +2,12 @@ import React from "react";
 import ClockIcon from "../common/ClockIcon";
 import HotIcon from "../common/HotIcon";
 import PopularIcon from "../common/PopularIcon";
-import Select from "react-select";
-import styles from "./SortBy.module.css";
-import { Flex, Text, Button } from "rebass";
+import { Flex } from "rebass";
 import SortByButton from "./SortByButton";
 
-const options = [
-  { value: "created_at", label: "New" },
-  { value: "comment_count", label: "Hot" },
-  { value: "votes", label: "Popular" }
-];
-
 const SortBy = ({ onSort, sortBy }) => {
-  const handleChange = selectedOption => {
-    onSort(selectedOption.value);
-  };
-
   return (
-    <Flex
-      width="100vw"
-      maxWidth={{ sm: "400px" }}
-      flexDirection="row"
-      sx={{
-        borderTopColor: "border",
-        borderTopWidth: "1px",
-        borderTopStyle: "solid"
-      }}
-      mb={1}
-    >
+    <Flex width="100vw" maxWidth={{ sm: "400px" }} flexDirection="row" mb={6}>
       <SortByButton
         isActive={sortBy === "created_at"}
         onClick={() => onSort("created_at")}
