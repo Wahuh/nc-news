@@ -9,14 +9,17 @@ const TopicItem = ({ topic }) => {
       paddingX={4}
       paddingY={1}
       backgroundColor="#4183c4"
+      mr={5}
       sx={{
         borderRadius: "3px",
         "&:hover": {
           backgroundColor: "#3672ad"
         },
+        "&:last-child": {
+          marginRight: 0
+        },
         transition: "background-color 200ms ease-out"
       }}
-      mr={5}
       as="li"
       alignItems="center"
     >

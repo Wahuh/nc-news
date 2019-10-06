@@ -21,7 +21,6 @@ class SuggestedTopics extends Component {
           as="p"
           letterSpacing="0.025em"
           color="body"
-          mr={5}
         >
           SUGGESTED TOPICS
         </Text>
