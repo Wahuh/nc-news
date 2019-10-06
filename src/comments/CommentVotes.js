@@ -9,19 +9,27 @@ import Toast from "../common/Toast";
 class CommentVotes extends Component {
   state = {
     change: 0,
-    err: null
+    err: null,
+    hasVoted: false
   };
 
   handleVote = async voteDiff => {
     const { comment_id } = this.props;
-    this.setState(currentState => ({ change: currentState.change + voteDiff }));
-    try {
-      await api.patchComment({ comment_id, inc_votes: voteDiff });
-    } catch (err) {
+    const { hasVoted } = this.state;
+    if (!hasVoted) {
       this.setState(currentState => ({
-        err,
-        change: currentState.change - voteDiff
+        change: currentState.change + voteDiff,
+        hasVoted: true
       }));
+      try {
+        await api.patchComment({ comment_id, inc_votes: voteDiff });
+      } catch (err) {
+        this.setState(currentState => ({
+          err,
+          change: currentState.change - voteDiff,
+          hasVoted: false
+        }));
+      }
     }
   };
 
